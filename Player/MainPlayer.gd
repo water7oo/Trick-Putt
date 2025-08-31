@@ -1,4 +1,5 @@
 extends CharacterBody3D
+# COmment lololol lololo im typing rn and coding look at me laddiddeee
 
 @onready var state_machine: LimboHSM = $LimboHSM
 @onready var idle_state = $LimboHSM/IdleState
