@@ -24,7 +24,7 @@ var blend_lerp_speed = 10.0
 
 #Walk State Base movement values
 @export var BASE_SPEED: float = 9.0
-@export var MAX_SPEED: float = 12.0  # Reduce slightly for better control
+@export var MAX_SPEED: float = 15.0  # Reduce slightly for better control
 @export var ACCELERATION: float = 30.0  # Slightly higher for snappier movement
 @export var DECELERATION: float = 40.0  # Increase for quicker stopping
 @export var BASE_DECELERATION: float = 40.0  # Matches normal deceleration

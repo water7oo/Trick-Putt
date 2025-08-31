@@ -6,7 +6,7 @@ extends LimboState
 @onready var playerCharScene =  $"../../RootNode/COWBOYPLAYER_V4"
 @onready var gameJuice = get_node("/root/GameJuice")
 
-@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+#@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
 
 @export var attackPush: float = 10.0
 @export var DECELERATION: float = Global.DECELERATION + 100
@@ -56,7 +56,7 @@ func _process_attack(delta: float) -> void:
 				_exit_attack_state()
 
 func _start_attack() -> void:
-	animationTree.set("parameters/AttackShot/request", 1)
+	#animationTree.set("parameters/AttackShot/request", 1)
 	is_attacking = true
 	attack_cooldown = attack_cooldown_amount
 	combo_timer = combo_window_duration

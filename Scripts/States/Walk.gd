@@ -4,7 +4,7 @@ extends LimboState
 @onready var state_machine: LimboHSM = $LimboHSM
 
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
+#@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
 
 @export var JUMP_VELOCITY: float = 12.0  # Increased for better jump height
 const CUSTOM_GRAVITY: float = 30.0  # Keeps the character from feeling too floaty
@@ -43,7 +43,7 @@ func player_movement(delta: float) -> void:
 		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), Global.armature_rot_speed)
 		Global.target_blend_amount = 0.0
 		Global.current_blend_amount = lerp(Global.current_blend_amount, Global.target_blend_amount, Global.blend_lerp_speed * delta)
-		animationTree.set("parameters/Ground_Blend/blend_amount", 1)
+		#animationTree.set("parameters/Ground_Blend/blend_amount", 1)
 
 		var target_rotation = atan2(direction.x, direction.z)
 

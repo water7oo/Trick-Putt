@@ -5,7 +5,7 @@ extends LimboState
 @onready var state_machine: LimboHSM = $LimboHSM
 
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+#@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
 
 @export var BASE_SPEED: float = Global.BASE_SPEED - 5
 @export var DECELERATION: float = Global.DECELERATION - 5 
@@ -44,7 +44,7 @@ func player_idle(delta: float) -> void:
 		# Ensure the transition looks smooth
 		Global.target_blend_amount = 0.0
 		Global.current_blend_amount = lerp(Global.current_blend_amount, Global.target_blend_amount, Global.blend_lerp_speed * delta)
-		animationTree.set("parameters/Ground_Blend/blend_amount", -1)
+		#animationTree.set("parameters/Ground_Blend/blend_amount", -1)
 
 func initialize_jump(delta: float) -> void:
 	if Input.is_action_just_pressed("move_jump"):

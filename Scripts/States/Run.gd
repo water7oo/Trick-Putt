@@ -5,7 +5,7 @@ extends LimboState
 @onready var armature = $"../../RootNode"
 
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
+#@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
 
 var sprinting = Input.is_action_pressed("move_sprint")
 var is_in_air: bool = false
@@ -69,7 +69,7 @@ func player_run(delta: float) -> void:
 		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), Global.armature_rot_speed)
 		
 		# Set animation blend to run
-		animationTree.set("parameters/Ground_Blend2/blend_amount", 0)
+		#animationTree.set("parameters/Ground_Blend2/blend_amount", 0)
 		
 		target_speed = MAX_SPEED
 		ACCELERATION = DASH_ACCELERATION
@@ -104,7 +104,7 @@ func player_run(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, DECELERATION * delta)
 
 		# Always reset blend amount when stopping
-		animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
+		#animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
 
 		# Sliding effect when no input
 		if direction == Vector3.ZERO:
@@ -115,18 +115,18 @@ func player_run(delta: float) -> void:
 
 	# Ensure transition to idle when completely stopped
 	if velocity.length() <= 0:
-		animationTree.set("parameters/Ground_Blend2/blend_amount", -1) # Ensure idle animation is set
+		#animationTree.set("parameters/Ground_Blend2/blend_amount", -1) # Ensure idle animation is set
 		agent.state_machine.dispatch("to_idle")
 	
 	elif Input.is_action_pressed("move_crouch"):
-		animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
-		animationTree.set("parameters/Ground_Blend/blend_amount", 0)
+		#animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
+		#animationTree.set("parameters/Ground_Blend/blend_amount", 0)
 		agent.state_machine.dispatch("to_crouch")
 
 
 
 	elif Input.is_action_just_released("move_sprint") && direction != Vector3.ZERO:
-		animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
+		#animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
 		agent.state_machine.dispatch("to_walk")
 
 	agent.velocity = velocity
@@ -134,13 +134,13 @@ func player_run(delta: float) -> void:
 
 func initialize_runJump(delta: float) -> void:
 	if Input.is_action_just_pressed("move_jump") and agent.is_on_floor():
-		animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
+		#animationTree.set("parameters/Ground_Blend2/blend_amount", -1)
 		agent.state_machine.dispatch("to_runJump")
 	pass
 
 func initialize_crouch(delta: float) -> void:
 	if Input.is_action_pressed("move_crouch"):
-		animationTree.set("parameters/Ground_Blend/blend_amount", 0)
+		#animationTree.set("parameters/Ground_Blend/blend_amount", 0)
 		agent.state_machine.dispatch("to_crouch")
 
 func initialize_attack(delta: float) -> void:

@@ -4,7 +4,8 @@ extends LimboState
 @export var animation: StringName
 @onready var state_machine: LimboHSM = $LimboHSM
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+#@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+
 @onready var gameJuice = get_node("/root/GameJuice")
 
 
@@ -20,9 +21,9 @@ func _enter() -> void:
 	Global.can_move = false
 	taking_damage = true
 	
-	animationTree.set("parameters/Jump_Blend/blend_amount", -1)
-	animationTree.set("parameters/Ground_Blend/blend_amount", -1)
-	animationTree.set("parameters/Ground_Blend/blend_amount", -1)
+	#animationTree.set("parameters/Jump_Blend/blend_amount", -1)
+	#animationTree.set("parameters/Ground_Blend/blend_amount", -1)
+	#animationTree.set("parameters/Ground_Blend/blend_amount", -1)
 	print("Parent node of agent:", agent)
 	pause()
 	gameJuice.objectShake(agent, 0.03, .3)

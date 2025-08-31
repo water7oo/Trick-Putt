@@ -57,10 +57,10 @@ spring_length = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D/Margin"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 1.14471, 14.6083)
+transform = Transform3D(1, 0, 0, 0, 0.995242, 0.0974265, 0, -0.0974265, 0.995242, 0, 3.7093, 11.3723)
 current = true
-fov = 45.0
-size = 5.762
+fov = 102.4
+size = 0.499
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpringArmPivot/SpringArm3D/Margin/Camera3D"]
 transform = Transform3D(2, -2.32831e-10, -5.96046e-08, 2.32831e-10, 2, 0, 0, 0, 2, 0.0447144, -0.107597, -1.45398)

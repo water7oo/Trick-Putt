@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brrrn3wfv6ree"]
+[gd_scene load_steps=11 format=3 uid="uid://brrrn3wfv6ree"]
 
 [ext_resource type="Script" uid="uid://bhem8ubmmltip" path="res://Scripts/playerHealthManager.gd" id="5_7cs5x"]
 [ext_resource type="StyleBox" uid="uid://b7b3hqmwfdjgv" path="res://MaterialTextures/UI_COOLDOWN_BACK.tres" id="6_crhng"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://q6udxs3hkfpd" path="res://Sounds/714258__qubodup__cloud-poof.wav" id="10_pq671"]
 [ext_resource type="AudioStream" uid="uid://cnmrvupfaedd3" path="res://Sounds/350905__cabled_mess__jump_c_05.wav" id="11_aobm7"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vlldt"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybxi3"]
 height = 1.71689
 
@@ -16,6 +18,10 @@ bg_color = Color(0.407843, 0.776471, 0, 1)
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.7, 0, 4.26326e-14, 0, 1.7, 0, -4.26326e-14, 0, 1.7, 0, 1.58901, 0)
+mesh = SubResource("CapsuleMesh_vlldt")
 
 [node name="HurtBox" type="Area3D" parent="."]
 transform = Transform3D(-2.5, 0, 2.18557e-07, 0, 2.5, 0, -2.18557e-07, 0, -2.5, 0, 0, 0)

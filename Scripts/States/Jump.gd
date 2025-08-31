@@ -3,7 +3,7 @@ extends LimboState
 @onready var armature = $"../../RootNode"
 @onready var state_machine: LimboHSM = $LimboHSM
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+#@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
 
 @export var BASE_SPEED: float = 6.0  
 @export var MAX_SPEED: float = Global.MAX_SPEED - 3
@@ -21,7 +21,7 @@ var velocity = Vector3.ZERO
 func _enter() -> void:
 	print("Current State:", agent.state_machine.get_active_state())
 	agent.velocity.y = Global.JUMP_VELOCITY
-	animationTree.set("parameters/Jump_Blend/blend_amount", 1)
+	#animationTree.set("parameters/Jump_Blend/blend_amount", 1)
 	
 	air_timer = 0.0
 	jump_timer = 0.0
@@ -47,7 +47,7 @@ func player_jump(delta: float) -> void:
 	# Landing logic with smooth deceleration instead of hard stop
 	if agent.is_on_floor():
 		print("Landed!")
-		animationTree.set("parameters/Jump_Blend/blend_amount", -1)
+		#animationTree.set("parameters/Jump_Blend/blend_amount", -1)
 		
 		# Reduce velocity smoothly rather than stopping immediately
 		agent.velocity.x = move_toward(agent.velocity.x, agent.velocity.x * 0.5, 20 * delta)
@@ -63,6 +63,6 @@ func player_jump(delta: float) -> void:
 
 
 
-	if not agent.is_on_floor() and agent.velocity.y < 0:
-		animationTree.set("parameters/Jump_Blend/blend_amount", 0)
-		#print("Falling!")
+	#if not agent.is_on_floor() and agent.velocity.y < 0:
+		##animationTree.set("parameters/Jump_Blend/blend_amount", 0)
+		##print("Falling!")

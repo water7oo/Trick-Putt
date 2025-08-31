@@ -1,4 +1,4 @@
-extends "res://Player/attack1.gd"  # Inherits logic from Attack1
+extends "res://Scripts/old scripts/attack1.gd"  # Inherits logic from Attack1
 
 func _enter():
 	attack_box.monitoring = true
