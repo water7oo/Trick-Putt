@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bljxiew7xfi84"]
+[gd_scene load_steps=47 format=3 uid="uid://bljxiew7xfi84"]
 
 [ext_resource type="Script" uid="uid://cllxit7uok2xf" path="res://Scripts/MainPlayer.gd" id="1_ra580"]
 [ext_resource type="Script" uid="uid://ccppxbc7l7ekv" path="res://Scripts/States/Idle.gd" id="3_e6nmv"]
@@ -3510,6 +3510,8 @@ _data = {
 &"WALK": SubResource("Animation_7hgkg")
 }
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1rutp"]
+
 [node name="Cowboy" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, 0, 0, 0)
 wall_min_slide_angle = 0.0
@@ -3654,6 +3656,10 @@ transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, -1.50914
 libraries = {
 &"": SubResource("AnimationLibrary_vsafk")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(135.276, 0, 0, 0, 135.276, 0, 0, 0, 135.276, 0, 135.721, 0)
+mesh = SubResource("CapsuleMesh_1rutp")
 
 [connection signal="area_entered" from="RootNode/AttackBox" to="." method="_on_attack_box_area_entered"]
 [connection signal="area_exited" from="RootNode/AttackBox" to="." method="_on_attack_box_area_exited"]

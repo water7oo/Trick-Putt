@@ -16,7 +16,7 @@ var is_mouse_visible: bool = true
 @export var period: float = .04
 @export var magnitude: float = 0.08
 
-var y_cam_rot_dist: float = -80
+var y_cam_rot_dist: float = 0
 var x_cam_rot_dist: float = 1
 
 var original_global_transform: Transform3D

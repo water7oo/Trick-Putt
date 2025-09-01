@@ -13,7 +13,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ov31c"]
 shader = ExtResource("2_nbohg")
 shader_parameter/change_color_depth = true
-shader_parameter/target_color_depth = 4
+shader_parameter/target_color_depth = 3
 shader_parameter/dithering = true
 shader_parameter/scale_resolution = true
 shader_parameter/target_resolution_scale = 2
@@ -71,23 +71,19 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Floor" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(11.342, 7.11225e-10, 0, 1.77636e-15, 9.38252, 0, 0, 0, 8.72365, -4.85705, -0.569923, -0.345418)
-size = Vector3(0.766698, 0.425964, 0.271454)
-
-[node name="wall" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(-4.95775e-07, 1.87893e-05, -503.265, 1.08214e-08, 9.38252, 4.80166e-07, 0.196603, -3.25684e-07, -3.81323e-07, -4.85705, -0.569923, 0.740686)
-size = Vector3(0.766698, 0.425964, 0.271454)
+transform = Transform3D(11.342, 7.98536e-10, 0, 1.77636e-15, 9.38252, 0, 0, 0, 8.72365, -4.85705, -0.569923, -0.579629)
+size = Vector3(0.766698, 0.425964, 0.217758)
 
 [node name="Floor3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(-4.95775e-07, 1.87893e-05, -503.265, 1.08214e-08, 9.38252, 4.80166e-07, 0.196603, -3.25684e-07, -3.81323e-07, -4.85705, -0.569923, -1.4492)
-size = Vector3(0.766698, 0.425964, 0.271454)
+transform = Transform3D(-4.95775e-07, 1.87896e-05, -288.169, 1.08214e-08, 9.38252, 2.74942e-07, 0.196603, -3.25684e-07, -2.18345e-07, -4.85705, -0.0206682, -0.311433)
+size = Vector3(0.766698, 0.308884, 0.271454)
+
+[node name="wall2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-1.0206e-07, -1.66519e-11, -288.169, 0.196603, -7.35807e-07, 0.000576861, -1.94142e-08, -9.38252, 0.000576809, -4.85705, 0.808843, -0.897571)
+size = Vector3(0.766698, 0.31015, 0.271454)
 
 [node name="Floor4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(-1.16004, 8.23083, -500.533, 0.246215, 0.211258, -1.11873, 0.00401933, -7.44784, -0.18622, -4.85705, 1.11133, -0.559095)
-size = Vector3(0.766698, 0.425964, 0.271454)
-
-[node name="Floor5" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(-1.16004, 8.23083, -500.533, 0.246215, 0.211258, -1.11873, 0.00401933, -7.44784, -0.18622, -4.85705, -2.44732, -0.559095)
+transform = Transform3D(-1.0206e-07, -1.66519e-11, -288.169, 0.196603, -7.35807e-07, 0.000576865, -1.94142e-08, -9.38252, 0.000576809, -4.85705, -2.60885, -0.354257)
 size = Vector3(0.766698, 0.425964, 0.271454)
 
 [node name="Pausing" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("4_x187o")]
@@ -105,7 +101,7 @@ mouse_force_pass_scroll_events = false
 color = Color(0, 0, 0, 1)
 
 [node name="Enemy" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("9_38om4")]
-transform = Transform3D(0.7, 0, 1.22391e-07, 0, 0.7, 0, -1.22391e-07, 0, 0.7, 1.4635, 0.762087, -2.95968)
+transform = Transform3D(0.7, 0, 1.22391e-07, 0, 0.7, 0, -1.22391e-07, 0, 0.7, 1.4635, 0.762087, 9.82457)
 metadata/_edit_group_ = true
 
 [node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_hq17w")]
