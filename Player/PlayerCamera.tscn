@@ -8,7 +8,8 @@
 render_priority = 0
 shader = ExtResource("2_5olaf")
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
-shader_parameter/shadow_thickness = 2.135
+shader_parameter/sensitivity = 100.0
+shader_parameter/thickness = 2.345
 
 [sub_resource type="QuadMesh" id="QuadMesh_n1m7q"]
 size = Vector2(5, 5)
@@ -53,7 +54,7 @@ spring_length = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D/Margin"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 0.96154, 0.274664, 0, -0.274664, 0.96154, 0, 7.88281, 18.224)
+transform = Transform3D(1, 0, 0, 0, 0.96154, 0.274664, 0, -0.274664, 0.96154, 0, 9.34171, 22.0309)
 current = true
 fov = 45.6
 size = 0.499
@@ -77,14 +78,12 @@ visible = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="SpringArmPivot"]
 transform = Transform3D(0.445, 0, 0, 0, 0.444999, 0, 0, 0, 0.445, 0, 1.38965, 0.232)
-visible = false
 material_override = SubResource("ShaderMaterial_wivcw")
 mesh = SubResource("CapsuleMesh_a8st2")
 skeleton = NodePath("../SpringArm3D/Margin/Camera3D")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="SpringArmPivot"]
 transform = Transform3D(0.698, 0, 0, 0, 0.698, 0, 0, 0, 0.698, 0, 0, 0)
-visible = false
 material_override = SubResource("ShaderMaterial_wivcw")
 mesh = SubResource("BoxMesh_t12er")
 skeleton = NodePath("../SpringArm3D/Margin/Camera3D")

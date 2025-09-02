@@ -27,8 +27,8 @@ func _update(delta: float) -> void:
 	initialize_jump(delta)
 	initialize_run(delta)
 	initialize_burst(delta)
-	initialize_crouch(delta)
-	initialize_attack(delta)
+	initialize_aim(delta)
+	initialize_shoot(delta)
 	#print(velocity.length())
 	agent.move_and_slide()
 
@@ -102,13 +102,11 @@ func initialize_burst(delta: float) -> void:
 		agent.state_machine.dispatch("to_burst")
 		
 		
-func initialize_crouch(delta: float) -> void:
-	if Input.is_action_pressed("move_crouch"):
-		agent.state_machine.dispatch("to_crouch")
+func initialize_aim(delta: float) -> void:
+	if Input.is_action_pressed("ADS"):
+		agent.state_machine.dispatch("to_aim")
 		
 
-func initialize_attack(delta: float) -> void:
-	
-	#pressing attack unsheathes katana and player is in attackmode
-	if Input.is_action_just_pressed("attack_light_1"):
-		agent.state_machine.dispatch("to_attack")
+func initialize_shoot(delta: float) -> void:
+	if Input.is_action_just_pressed("Fire"):
+		agent.state_machine.dispatch("to_shoot")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bljxiew7xfi84"]
+[gd_scene load_steps=45 format=3 uid="uid://bljxiew7xfi84"]
 
 [ext_resource type="Script" uid="uid://cllxit7uok2xf" path="res://Scripts/MainPlayer.gd" id="1_ra580"]
 [ext_resource type="Script" uid="uid://ccppxbc7l7ekv" path="res://Scripts/States/Idle.gd" id="3_e6nmv"]
@@ -9,14 +9,11 @@
 [ext_resource type="StyleBox" uid="uid://djj55b17fblr1" path="res://MaterialTextures/Sprint_Fill_Green.tres" id="5_ucyed"]
 [ext_resource type="Script" uid="uid://bhem8ubmmltip" path="res://Scripts/playerHealthManager.gd" id="5_vjco1"]
 [ext_resource type="Script" uid="uid://b8jrqb4iqjbm4" path="res://Scripts/States/Run.gd" id="5_wlkfw"]
-[ext_resource type="Script" uid="uid://d02xavwj8xmcu" path="res://Scripts/old scripts/burst.gd" id="7_1mupm"]
-[ext_resource type="Script" uid="uid://c7wq57pjqc84x" path="res://Scripts/States/RunJump.gd" id="8_ec3d6"]
-[ext_resource type="Script" uid="uid://bw7q8jcgsl3m8" path="res://Scripts/old scripts/Crouch.gd" id="8_gexv5"]
+[ext_resource type="PackedScene" uid="uid://d3tx218ss8h8h" path="res://Player/Weapons/Bullet1.tscn" id="7_i4tce"]
 [ext_resource type="Script" uid="uid://bjkhaj5omhcbw" path="res://Scripts/old scripts/Attack.gd" id="9_gu0nf"]
-[ext_resource type="Script" uid="uid://ca7wx65llufcw" path="res://Scripts/old scripts/attack1.gd" id="10_m03mu"]
-[ext_resource type="PackedScene" uid="uid://8mm04hdcqj7r" path="res://FX/AirDustWave2.tscn" id="10_uf676"]
-[ext_resource type="Script" uid="uid://ctm3qnn5r3vif" path="res://Scripts/old scripts/attack2.gd" id="11_ud7yb"]
-[ext_resource type="Script" uid="uid://ddwqtiuympnl3" path="res://Scripts/old scripts/attack3.gd" id="12_ud7yb"]
+[ext_resource type="Script" uid="uid://bw7q8jcgsl3m8" path="res://Scripts/old scripts/Aim.gd" id="10_ajgyf"]
+[ext_resource type="Script" uid="uid://ce0kq0vb2pdc1" path="res://Scripts/States/reloadState.gd" id="11_cdnn3"]
+[ext_resource type="Script" uid="uid://bncgo4vem8lk" path="res://Scripts/States/AimShootState.gd" id="12_i4tce"]
 [ext_resource type="Script" uid="uid://dmlj04uny03pk" path="res://Scripts/old scripts/takeDamege.gd" id="14_ga41d"]
 [ext_resource type="Script" uid="uid://dfrhd0jw7xuqs" path="res://Scripts/old scripts/recover_state.gd" id="15_3apqd"]
 
@@ -30,6 +27,10 @@ size = Vector3(2.18419, 1.71857, 1.87061)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ra580"]
 size = Vector3(1, 1.30188, 1.90045)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1rutp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cvtry"]
 
 [sub_resource type="Animation" id="Animation_674fv"]
 resource_name = "Armature_001|ATTACK"
@@ -3510,12 +3511,14 @@ _data = {
 &"WALK": SubResource("Animation_7hgkg")
 }
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1rutp"]
-
 [node name="Cowboy" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, 0, 0, 0)
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ra580")
+
+[node name="Muzzle" type="Marker3D" parent="."]
+transform = Transform3D(28.095, 0, 0, 0, 28.095, 0, 0, 0, 28.095, 0, 170.268, -141.425)
+gizmo_extents = 10.0
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 process_mode = 3
@@ -3541,46 +3544,25 @@ script = ExtResource("4_ahlvu")
 script = ExtResource("4_wae6y")
 ACCELERATION = 1.0
 
-[node name="RunJumpState" type="LimboState" parent="LimboHSM"]
-script = ExtResource("8_ec3d6")
-JUMP_VELOCITY = 13.0
-BASE_SPEED = 10.0
-
-[node name="BurstState" type="LimboState" parent="LimboHSM"]
-script = ExtResource("7_1mupm")
-
-[node name="CrouchState" type="LimboState" parent="LimboHSM"]
-script = ExtResource("8_gexv5")
-
-[node name="GroundDiveState" type="LimboState" parent="LimboHSM"]
-
-[node name="AirDiveState" type="LimboState" parent="LimboHSM"]
-
-[node name="SlideState" type="LimboState" parent="LimboHSM"]
-
-[node name="AttackState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("attack_box", "attack_box_col")]
+[node name="ShootState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("muzzle")]
 script = ExtResource("9_gu0nf")
-attack_box = NodePath("../../RootNode/AttackBox")
-attack_box_col = NodePath("../../RootNode/AttackBox/Attack_Debug")
-hit1 = ExtResource("10_uf676")
-
-[node name="Attack1" type="LimboState" parent="LimboHSM/AttackState" node_paths=PackedStringArray("attack_box")]
-script = ExtResource("10_m03mu")
-attack_box = NodePath("../../../RootNode/AttackBox")
-
-[node name="Attack2" type="LimboState" parent="LimboHSM/AttackState" node_paths=PackedStringArray("attack_box")]
-script = ExtResource("11_ud7yb")
-attack_box = NodePath("../../../RootNode/AttackBox")
-
-[node name="Attack3" type="LimboState" parent="LimboHSM/AttackState" node_paths=PackedStringArray("attack_box")]
-script = ExtResource("12_ud7yb")
-attack_box = NodePath("../../../RootNode/AttackBox")
+projectile_scene = ExtResource("7_i4tce")
+muzzle = NodePath("../../Muzzle")
 
 [node name="TakeDamageState" type="LimboState" parent="LimboHSM"]
 script = ExtResource("14_ga41d")
 
 [node name="RecoverState" type="LimboState" parent="LimboHSM"]
 script = ExtResource("15_3apqd")
+
+[node name="AimState" type="LimboState" parent="LimboHSM"]
+script = ExtResource("10_ajgyf")
+
+[node name="ReloadState" type="LimboState" parent="LimboHSM"]
+script = ExtResource("11_cdnn3")
+
+[node name="AimShootState" type="LimboState" parent="LimboHSM"]
+script = ExtResource("12_i4tce")
 
 [node name="RootNode" type="Node3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
@@ -3606,6 +3588,15 @@ script = ExtResource("5_vjco1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/HurtBox"]
 transform = Transform3D(-63.6277, 0, -7.83336e-06, 0, 63.6277, 0, 9.60759e-06, 0, -51.878, 0.00308587, 65.3406, 1.03753)
 shape = SubResource("BoxShape3D_ra580")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RootNode"]
+transform = Transform3D(1.35276, 0, 0, 0, 1.35276, 0, 0, 0, 1.35276, 0, 1.35721, 0)
+mesh = SubResource("CapsuleMesh_1rutp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RootNode/MeshInstance3D"]
+transform = Transform3D(0.75024, 0, 0, 0, 0.340471, 0, 0, 0, 0.825186, 0, 0.303025, -0.348036)
+mesh = SubResource("BoxMesh_cvtry")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -3656,10 +3647,6 @@ transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, -1.50914
 libraries = {
 &"": SubResource("AnimationLibrary_vsafk")
 }
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(135.276, 0, 0, 0, 135.276, 0, 0, 0, 135.276, 0, 135.721, 0)
-mesh = SubResource("CapsuleMesh_1rutp")
 
 [connection signal="area_entered" from="RootNode/AttackBox" to="." method="_on_attack_box_area_entered"]
 [connection signal="area_exited" from="RootNode/AttackBox" to="." method="_on_attack_box_area_exited"]

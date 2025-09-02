@@ -20,8 +20,9 @@ func _enter() -> void:
 func _update(delta: float) -> void:
 	player_idle(delta)
 	initialize_jump(delta)
-	initialize_crouch(delta)
-	initialize_attack(delta)
+	initialize_aim(delta)
+	initialize_shoot(delta)
+	initialize_reload(delta)
 
 func player_idle(delta: float) -> void:
 	
@@ -50,12 +51,15 @@ func initialize_jump(delta: float) -> void:
 	if Input.is_action_just_pressed("move_jump"):
 		agent.state_machine.dispatch("to_jump")
 		
-func initialize_crouch(delta: float) -> void:
-	if Input.is_action_pressed("move_crouch"):
-		agent.state_machine.dispatch("to_crouch")
+func initialize_aim(delta: float) -> void:
+	if Input.is_action_pressed("ADS"):
+		agent.state_machine.dispatch("to_aim")
 
-func initialize_attack(delta: float) -> void:
-	
-	#pressing attack unsheathes katana and player is in attackmode
-	if Input.is_action_just_pressed("attack_light_1"):
-		agent.state_machine.dispatch("to_attack")
+func initialize_shoot(delta: float) -> void:
+	if Input.is_action_just_pressed("Fire"):
+		print("shoot")
+		agent.state_machine.dispatch("to_shoot")
+
+func initialize_reload(delta: float) -> void:
+	if Input.is_action_just_pressed("reload"):
+		agent.state_machine.dispatch("to_reload")
