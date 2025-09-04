@@ -4,6 +4,7 @@ extends LimboState
 @export var muzzle: Marker3D   
 @export var max_ammo: int = 99
 @export var attack_cooldown_amount: float = 0.2
+var camera = preload("res://Player/PlayerCamera.tscn").instantiate()
 
 var ammo: int
 var is_attacking: bool = false

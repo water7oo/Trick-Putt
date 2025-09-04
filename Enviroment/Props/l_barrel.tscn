@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl4uavhyy0an4"]
+
+[ext_resource type="PackedScene" uid="uid://ci3t5a0b6pepj" path="res://Blender/LBarrel.blend" id="1_dowxp"]
+
+[node name="LBarrel" instance=ExtResource("1_dowxp")]

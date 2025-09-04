@@ -1,13 +1,11 @@
 extends CharacterBody3D
 
-@export var speed: float = 40.0
-var direction: Vector3 = Vector3.FORWARD
+var direction: Vector3
+var speed: float = 50.0
 
-func set_direction(dir: Vector3):
+func set_direction(dir: Vector3) -> void:
 	direction = dir.normalized()
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	velocity = direction * speed
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		queue_free() # Destroy on impact
+	move_and_slide()
