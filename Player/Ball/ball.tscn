@@ -1,0 +1,147 @@
+[gd_scene load_steps=23 format=3 uid="uid://s7e7l3au1xci"]
+
+[ext_resource type="Script" uid="uid://wuovol8q5s4x" path="res://Player/Ball/ball.gd" id="1_x8fbi"]
+[ext_resource type="PackedScene" uid="uid://b1cetjognw8y6" path="res://FX/DustWave2.tscn" id="2_avp1e"]
+[ext_resource type="AudioStream" uid="uid://dfgotdg07cird" path="res://Sounds/Sample_0010.wav" id="3_43ivl"]
+[ext_resource type="AudioStream" uid="uid://bhb1xbkn3lukx" path="res://Sounds/Sample_0004.wav" id="3_ftaac"]
+[ext_resource type="Gradient" uid="uid://brlyvoi2s3fa2" path="res://Player/Ball/balltrailDefaultSMASH.tres" id="3_il2rs"]
+[ext_resource type="FontFile" uid="uid://cg2l5vxyisqd1" path="res://ui/mario-kart-ds-oultine-font/mario-kart-ds-oultine-font.ttf" id="4_d4s7q"]
+[ext_resource type="Gradient" uid="uid://5vsiwdjoyf02" path="res://Player/Ball/balltrailDefault.tres" id="5_43ivl"]
+[ext_resource type="PackedScene" uid="uid://ugdlxfbar3wk" path="res://FX/hit_1.tscn" id="6_kp8ei"]
+[ext_resource type="Material" uid="uid://bldkvyovb0dws" path="res://Player/Ball/ballMaterialSMASH.tres" id="7_b557h"]
+[ext_resource type="Material" uid="uid://ldhitxh53ql3" path="res://Player/Ball/ballMaterial.tres" id="8_ngs66"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbx31"]
+friction = 0.0
+bounce = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbx31"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_x8fbi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_avp1e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cbx31"]
+
+[sub_resource type="Gradient" id="Gradient_avp1e"]
+offsets = PackedFloat32Array(0.615741, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d4s7q"]
+gradient = SubResource("Gradient_avp1e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftaac"]
+shading_mode = 0
+diffuse_mode = 3
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = SubResource("GradientTexture1D_d4s7q")
+use_particle_trails = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_43ivl"]
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_il2rs"]
+radius = 0.55
+radial_steps = 6
+sections = 4
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Curve" id="Curve_d4s7q"]
+_data = [Vector2(0, 0.442105), 0.0, 0.0, 0, 0, Vector2(0.0666667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_avp1e"]
+radius = 0.75369
+
+[node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("trailEmitter")]
+transform = Transform3D(-1.30743e-09, 0.999553, -0.0299105, 4.36918e-08, 0.0299105, 0.999553, 1, 0, -4.37114e-08, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_cbx31")
+gravity_scale = 2.5
+script = ExtResource("1_x8fbi")
+trailEmitter = NodePath("TrailEmitter")
+ballDefaultTrail = ExtResource("5_43ivl")
+ballDefaultTrailSmash = ExtResource("3_il2rs")
+ballDefaultTrailSmash2 = ExtResource("7_b557h")
+surface_effect_scene = ExtResource("2_avp1e")
+hit1 = ExtResource("6_kp8ei")
+hforce = 30.0
+force = 20.0
+smashForce = 30.0
+smashSteepness = 0.002
+BASE_VERTICAL_ARC = 0.5
+
+[node name="BallMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_cbx31")
+mesh = SubResource("SphereMesh_x8fbi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallMesh"]
+transform = Transform3D(1, 0, 0, 0, 0.14455, 0, 0, 0, 0.104277, -0.00504595, 0, 0.875928)
+visible = false
+mesh = SubResource("BoxMesh_avp1e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BallMesh"]
+transform = Transform3D(-4.37114e-08, 0, -0.104277, 0, 0.14455, 0, 1, 0, -4.55809e-09, -0.00504595, 0, 0.875928)
+visible = false
+mesh = SubResource("BoxMesh_avp1e")
+
+[node name="BallColllision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.255, 0, 0, 0, 1.255, 0, 0, 0, 1.255, 0, 0, 0)
+shape = SubResource("SphereShape3D_cbx31")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_43ivl")
+
+[node name="BallBounce" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_ftaac")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.28408e-08, -1, -4.37114e-08, 1, -4.28408e-08, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ftaac")
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_43ivl")
+draw_pass_1 = SubResource("TubeTrailMesh_il2rs")
+
+[node name="TrailEmitter" type="TrailEmitter" parent="."]
+material = ExtResource("8_ngs66")
+curve = SubResource("Curve_d4s7q")
+gradient = ExtResource("5_43ivl")
+num_points = 25
+noise_scale = 0.1
+size = 0.2
+update_interval = 0.05
+transform = Transform3D(8.9407e-08, 2.23517e-07, -1, 0.999895, -0.0144887, 3.27826e-07, -0.0144885, -0.999895, 2.08616e-07, -0.00599085, 0.00195137, -0.00545884)
+
+[node name="TrailEmitterSmash" type="TrailEmitter" parent="."]
+material = ExtResource("7_b557h")
+curve = SubResource("Curve_d4s7q")
+gradient = ExtResource("3_il2rs")
+num_points = 25
+noise_scale = 0.1
+size = 0.2
+update_interval = 0.05
+transform = Transform3D(8.9407e-08, 2.23517e-07, -1, 0.999895, -0.0144887, 3.27826e-07, -0.0144885, -0.999895, 2.08616e-07, -0.00599085, 0.00195137, -0.00545884)
+visible = false
+
+[node name="pBall" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pBall"]
+shape = SubResource("SphereShape3D_avp1e")
+debug_color = Color(0.930823, 0.263165, 0, 0.42)
+
+[node name="BallSpeed" type="RichTextLabel" parent="."]
+offset_left = 17.0
+offset_top = 541.0
+offset_right = 337.0
+offset_bottom = 581.0
+scale = Vector2(1.68, 1.68)
+theme_override_fonts/normal_font = ExtResource("4_d4s7q")
+text = "BALL SPEED: NULL"
+
+[connection signal="area_entered" from="pBall" to="." method="_on_p_ball_area_entered"]

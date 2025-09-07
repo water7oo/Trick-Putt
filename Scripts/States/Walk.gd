@@ -4,7 +4,7 @@ extends LimboState
 @onready var state_machine: LimboHSM = $LimboHSM
 
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-#@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
+@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
 
 @export var JUMP_VELOCITY: float = 12.0  # Increased for better jump height
 const CUSTOM_GRAVITY: float = 30.0  # Keeps the character from feeling too floaty
@@ -27,8 +27,9 @@ func _update(delta: float) -> void:
 	initialize_jump(delta)
 	initialize_run(delta)
 	initialize_burst(delta)
-	initialize_aim(delta)
-	initialize_shoot(delta)
+	initialize_crouch(delta)
+	initialize_swing(delta)
+	initialize_chargeSmash(delta)
 	#print(velocity.length())
 	agent.move_and_slide()
 
@@ -40,10 +41,10 @@ func player_movement(delta: float) -> void:
 
 	if direction != Vector3.ZERO && Global.can_move:
 		is_moving = true
-		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), Global.armature_rot_speed)
+		#armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), Global.armature_rot_speed)
 		Global.target_blend_amount = 0.0
 		Global.current_blend_amount = lerp(Global.current_blend_amount, Global.target_blend_amount, Global.blend_lerp_speed * delta)
-		#animationTree.set("parameters/Ground_Blend/blend_amount", 1)
+		animationTree.set("parameters/Ground_Blend/blend_amount", 1)
 
 		var target_rotation = atan2(direction.x, direction.z)
 
@@ -102,11 +103,15 @@ func initialize_burst(delta: float) -> void:
 		agent.state_machine.dispatch("to_burst")
 		
 		
-func initialize_aim(delta: float) -> void:
-	if Input.is_action_pressed("ADS"):
-		agent.state_machine.dispatch("to_aim")
+func initialize_crouch(delta: float) -> void:
+	if Input.is_action_pressed("move_crouch"):
+		agent.state_machine.dispatch("to_crouch")
 		
 
-func initialize_shoot(delta: float) -> void:
-	if Input.is_action_just_pressed("Fire"):
-		agent.state_machine.dispatch("to_shoot")
+func initialize_swing(delta: float) -> void:
+	if Input.is_action_just_pressed("swing1"):
+		agent.state_machine.dispatch("to_swing")
+
+func initialize_chargeSmash(delta: float) -> void:
+	if Input.is_action_pressed("swing2"):
+		agent.state_machine.dispatch("to_chargeSmash")

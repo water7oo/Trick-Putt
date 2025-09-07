@@ -3,7 +3,7 @@ extends LimboState
 @onready var state_machine: LimboHSM = $LimboHSM
 @onready var armature = $"../../RootNode"
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-#@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
+@onready var animationTree =  playerCharScene.find_child("AnimationTree", true)
 
 @export var runJumpMultiplier: float = 1.5
 @export var JUMP_VELOCITY: float = Global.JUMP_VELOCITY * runJumpMultiplier
@@ -30,7 +30,7 @@ var velocity = Vector3.ZERO
 func _enter() -> void:
 	print("Current State:", agent.state_machine.get_active_state())
 	agent.velocity.y = JUMP_VELOCITY
-	#animationTree.set("parameters/Jump_Blend/blend_amount", 1)
+	animationTree.set("parameters/Jump_Blend/blend_amount", 1)
 	# Reset timers and jump counter
 	air_timer = 0.0
 	jump_timer = 0.0
@@ -76,15 +76,15 @@ func player_runjump(delta: float) -> void:
 		agent.velocity.z = lerp(agent.velocity.z, direction.z * BASE_SPEED, Global.air_momentum_acceleration * delta)
 
 
-	#if not agent.is_on_floor() and agent.velocity.y < 0:
-		##animationTree.set("parameters/Jump_Blend/blend_amount", 0)
-		#
+	if not agent.is_on_floor() and agent.velocity.y < 0:
+		animationTree.set("parameters/Jump_Blend/blend_amount", 0)
+		
 		
 	# Landing logic
 	if agent.is_on_floor():
 		jump_timer = 0.0
 		air_timer = 0.0
-		#animationTree.set("parameters/Jump_Blend/blend_amount", -1)
+		animationTree.set("parameters/Jump_Blend/blend_amount", -1)
 		# Gradually slow down after landing instead of an abrupt stop
 		agent.velocity.x = move_toward(agent.velocity.x, 0, 100 * delta)
 		agent.velocity.z = move_toward(agent.velocity.z, 0, 100 * delta)

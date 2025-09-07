@@ -8,7 +8,7 @@ extends Node
 
 var global_data = GlobalResource.new()
 @export var CUSTOM_GRAVITY: float = 35.0
-var camera = preload("res://Player/PlayerCamera.tscn").instantiate()
+var camera = preload("res://Player/Scenes/PlayerCamera.tscn").instantiate()
 var spring_arm_pivot = camera.get_node("SpringArmPivot")
 var spring_arm = camera.get_node("SpringArmPivot/SpringArm3D")
 
@@ -18,19 +18,19 @@ var blend_lerp_speed = 10.0
 
 @export var mouse_sensitivity: float = 0.005
 
-@export var armature_rot_speed: float = 1
+@export var armature_rot_speed: float = .3
 @export var armature_default_rot_speed: float = 1
 @onready var armature = $Armature_001
 
 #Walk State Base movement values
-@export var BASE_SPEED: float = 9.0
-@export var MAX_SPEED: float = 15.0  # Reduce slightly for better control
-@export var ACCELERATION: float = 30.0  # Slightly higher for snappier movement
-@export var DECELERATION: float = 40.0  # Increase for quicker stopping
-@export var BASE_DECELERATION: float = 40.0  # Matches normal deceleration
+@export var BASE_SPEED: float = 6.0
+@export var MAX_SPEED: float = 10.0  # Reduce slightly for better control
+@export var ACCELERATION: float = 40.0  # Slightly higher for snappier movement
+@export var DECELERATION: float = 25.0  # Increase for quicker stopping
+@export var BASE_DECELERATION: float = 20.0  # Matches normal deceleration
 @export var momentum_deceleration: float = DECELERATION - 5
-@export var momentum_acceleration: float = ACCELERATION + 100
-@export var inertia_blend: float = 4
+@export var momentum_acceleration: float = ACCELERATION + 10
+@export var inertia_blend: float = 7
 
 @export var run_inertia_blend: float = inertia_blend/1.5
 
@@ -44,3 +44,7 @@ var last_enemy_hit = null
 
 #Jump State Base movement values:
 @export var JUMP_VELOCITY: float = 11.0  
+var isSwing: bool = false
+var isSmash: bool = false
+var is_player_hit := false
+var is_opponent_hit := false

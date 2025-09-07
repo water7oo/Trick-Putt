@@ -5,7 +5,7 @@ extends LimboState
 @onready var state_machine: LimboHSM = $LimboHSM
 
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-#@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
 
 @export var BASE_SPEED: float = Global.BASE_SPEED - 5
 @export var DECELERATION: float = Global.DECELERATION - 5 
@@ -20,9 +20,9 @@ func _enter() -> void:
 func _update(delta: float) -> void:
 	player_idle(delta)
 	initialize_jump(delta)
-	initialize_aim(delta)
-	initialize_shoot(delta)
-	initialize_reload(delta)
+	initialize_crouch(delta)
+	initialize_swing(delta)
+	initialize_chargeSmash(delta)
 
 func player_idle(delta: float) -> void:
 	
@@ -45,21 +45,21 @@ func player_idle(delta: float) -> void:
 		# Ensure the transition looks smooth
 		Global.target_blend_amount = 0.0
 		Global.current_blend_amount = lerp(Global.current_blend_amount, Global.target_blend_amount, Global.blend_lerp_speed * delta)
-		#animationTree.set("parameters/Ground_Blend/blend_amount", -1)
+		animationTree.set("parameters/Ground_Blend/blend_amount", -1)
 
 func initialize_jump(delta: float) -> void:
 	if Input.is_action_just_pressed("move_jump"):
 		agent.state_machine.dispatch("to_jump")
 		
-func initialize_aim(delta: float) -> void:
-	if Input.is_action_pressed("ADS"):
-		agent.state_machine.dispatch("to_aim")
+func initialize_crouch(delta: float) -> void:
+	if Input.is_action_pressed("move_crouch"):
+		agent.state_machine.dispatch("to_crouch")
 
-func initialize_shoot(delta: float) -> void:
-	if Input.is_action_just_pressed("Fire"):
-		print("shoot")
-		agent.state_machine.dispatch("to_shoot")
+func initialize_swing(delta: float) -> void:
+	if Input.is_action_just_pressed("swing1"):
+		agent.state_machine.dispatch("to_swing")
 
-func initialize_reload(delta: float) -> void:
-	if Input.is_action_just_pressed("reload"):
-		agent.state_machine.dispatch("to_reload")
+
+func initialize_chargeSmash(delta: float) -> void:
+	if Input.is_action_pressed("swing2"):
+		agent.state_machine.dispatch("to_chargeSmash")

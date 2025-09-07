@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1vyqk1e375wi"]
-
-[ext_resource type="PackedScene" uid="uid://cuegagk57r8y0" path="res://Blender/Barrel.blend" id="1_gyk14"]
-
-[node name="Barrel" instance=ExtResource("1_gyk14")]

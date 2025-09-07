@@ -3,7 +3,7 @@ extends LimboState
 @onready var armature = $"../../RootNode"
 @onready var state_machine: LimboHSM = $LimboHSM
 @onready var playerCharScene = $"../../RootNode/COWBOYPLAYER_V4"
-#@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
+@onready var animationTree = playerCharScene.find_child("AnimationTree", true)
 
 @export var BASE_SPEED: float = 6.0  
 @export var MAX_SPEED: float = Global.MAX_SPEED - 3
@@ -29,6 +29,7 @@ func _enter() -> void:
 
 func _update(delta: float) -> void:
 	player_jump(delta)
+	initialize_swing(delta)
 	agent.move_and_slide()
 
 func player_jump(delta: float) -> void:
@@ -38,7 +39,7 @@ func player_jump(delta: float) -> void:
 
 	# Preserve momentum mid-air
 	if direction != Vector3.ZERO:
-		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-direction.x, -direction.z), Global.armature_rot_speed)
+		#armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-direction.x, -direction.z), Global.armature_rot_speed)
 
 		# Maintain forward momentum but allow direction blending
 		agent.velocity.x = lerp(agent.velocity.x, direction.x * BASE_SPEED, Global.air_momentum_acceleration * delta)
@@ -47,7 +48,7 @@ func player_jump(delta: float) -> void:
 	# Landing logic with smooth deceleration instead of hard stop
 	if agent.is_on_floor():
 		print("Landed!")
-		#animationTree.set("parameters/Jump_Blend/blend_amount", -1)
+		animationTree.set("parameters/Jump_Blend/blend_amount", -1)
 		
 		# Reduce velocity smoothly rather than stopping immediately
 		agent.velocity.x = move_toward(agent.velocity.x, agent.velocity.x * 0.5, 20 * delta)
@@ -63,6 +64,10 @@ func player_jump(delta: float) -> void:
 
 
 
-	#if not agent.is_on_floor() and agent.velocity.y < 0:
-		##animationTree.set("parameters/Jump_Blend/blend_amount", 0)
-		##print("Falling!")
+	if not agent.is_on_floor() and agent.velocity.y < 0:
+		animationTree.set("parameters/Jump_Blend/blend_amount", 0)
+		#print("Falling!")
+
+func initialize_swing(delta: float) -> void:
+	if Input.is_action_just_pressed("swing1"):
+		agent.state_machine.dispatch("to_swing")
