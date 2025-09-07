@@ -1,13 +1,11 @@
-[gd_scene load_steps=18 format=4 uid="uid://b2ud3ury8epgi"]
+[gd_scene load_steps=12 format=4 uid="uid://b2ud3ury8epgi"]
 
 [ext_resource type="Environment" uid="uid://cadv2uehcxqkc" path="res://MaterialTextures/NewGame.tres" id="1_c0qo6"]
 [ext_resource type="Material" uid="uid://dcuvjs33ebpe3" path="res://MaterialTextures/Room.tres" id="1_ewgn2"]
 [ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_nbohg"]
 [ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="4_rsb4y"]
 [ext_resource type="PackedScene" uid="uid://brejidgy2nq2j" path="res://ui/Pausing.tscn" id="4_x187o"]
-[ext_resource type="Texture2D" uid="uid://cl6qg2stv7rpx" path="res://addons/kenney_prototype_textures/light/texture_10.png" id="6_mlbvo"]
 [ext_resource type="Shader" uid="uid://b1hg6btlggl78" path="res://TRASH/uhhhhh.gdshader" id="7_kt4n2"]
-[ext_resource type="PackedScene" uid="uid://bgkmd80vrnlao" path="res://Player/Scenes/Player.tscn" id="10_tkxv2"]
 [ext_resource type="PackedScene" uid="uid://s7e7l3au1xci" path="res://Player/Ball/ball.tscn" id="11_4nbnq"]
 [ext_resource type="PackedScene" uid="uid://7l5yih8w56c3" path="res://Player/Scenes/PlayerCamera.tscn" id="11_hq17w"]
 
@@ -23,28 +21,10 @@ shader_parameter/scale_resolution = true
 shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = false
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nbnq"]
-diffuse_mode = 3
-specular_mode = 2
-disable_ambient_light = true
-albedo_texture = ExtResource("6_mlbvo")
-uv1_scale = Vector3(-3.06, -3.06, -3.06)
-uv1_offset = Vector3(-0.035, 0.105, 0)
-uv1_triplanar_sharpness = 0.233259
-texture_filter = 4
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mlbvo"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4nbnq"]
-size = Vector3(25.2701, 0.0374756, 0.172607)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_md3uv"]
 shader = ExtResource("7_kt4n2")
 shader_parameter/speedScale = 50.875
 shader_parameter/clipPosition = 0.2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8mhp7"]
-size = Vector3(2.20325, 3.95282, 0.186768)
 
 [node name="TRAINING" type="Node3D"]
 
@@ -101,103 +81,37 @@ render_target_update_mode = 4
 [node name="Floor" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
 transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55995e-06, 0, 0, 0, 44.9384, -12.3233, 1.15208, 10)
 material_overlay = ExtResource("1_ewgn2")
+operation = 1
 use_collision = true
 collision_layer = 3
 collision_mask = 3
+
+[node name="wall" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-5.61142e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.252652, -0.232315, -0.0437963)
+size = Vector3(0.364502, 1, 28.8405)
+
+[node name="wall2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-5.61142e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.252652, -0.44712, -0.0437963)
+size = Vector3(0.364502, 1, 28.8405)
+
+[node name="wall3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252652, -0.3385, 0.27383)
+size = Vector3(0.364502, 1, 8.69913)
+
+[node name="wall4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252652, -0.3385, -0.35737)
+size = Vector3(0.364502, 1, 8.69913)
 
 [node name="Floor" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(11.342, 2.03727e-09, 0, 1.77636e-15, 9.38252, 0, 0, 0, 8.72365, -1.84045, -0.339397, -0.0108016)
-size = Vector3(0.234765, 0.136091, 0.131774)
+transform = Transform3D(11.342, -6.82121e-13, 0, 1.77636e-15, 1.633, 0, 0, 0, 8.724, -28.904, -0.339397, -0.0448122)
+size = Vector3(5.00703, 0.136091, 0.0712736)
 
-[node name="Floor2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(11.342, 1.74441e-09, 0, 1.77636e-15, 9.38252, 0, 0, 0, 8.72365, -5.09211, -0.328517, -0.575319)
-size = Vector3(4.71553, 0.13841, 0.00106716)
-
-[node name="Floor4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(11.342, -1.87876e-05, -1.74699e-05, -2.27133e-05, -4.10085e-07, -8.72365, 2.27134e-05, 9.38252, -3.81323e-07, -5.09211, 0.291851, 0.0827602)
-visible = false
-size = Vector3(4.71553, 0.12936, 0.00106716)
-
-[node name="Floor5" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(11.342, -1.87876e-05, -1.74699e-05, -2.27133e-05, -4.10085e-07, -8.72365, 2.27134e-05, 9.38252, -3.81323e-07, -5.09211, -0.938337, 0.0827602)
-visible = false
-size = Vector3(4.71553, 0.12936, 0.00106716)
-
-[node name="Floor3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(11.342, 1.78443e-09, 0, 1.77636e-15, 9.38252, 0, 0, 0, 8.72365, -4.08584, -0.33138, 0.538707)
-visible = false
-size = Vector3(4.89297, 0.1378, 0.00323296)
-
-[node name="Table" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55995e-06, 0, 0, 0, 44.9384, -12.3233, 19.8725, 8.67307)
-material_overlay = SubResource("StandardMaterial3D_4nbnq")
-use_collision = true
-collision_layer = 3
-collision_mask = 3
-
-[node name="Floor" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Table"]
-transform = Transform3D(2.663, 0, 0, 0, 2.203, 0, 0, 0, 3.25547, -23.1057, -0.328772, -0.275671)
-size = Vector3(0.119897, 0.0927658, 0.110226)
-
-[node name="Floor6" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Table"]
-transform = Transform3D(2.663, 0, 0, 0, 2.203, 0, 0, 0, 2.048, -22.6707, -0.330792, -0.271959)
-visible = false
-size = Vector3(0.492036, 0.0927658, 0.001)
-
-[node name="Floor2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Table"]
-transform = Transform3D(2.059, 0, 0, -6.21725e-15, 1.703, 0, 0, 0, 2.51631, -24.6799, -0.239158, -0.438968)
-size = Vector3(1.61443, 0.00548933, 0.006773)
-
-[node name="Floor3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Table"]
-transform = Transform3D(2.059, 0, 0, -6.21725e-15, 1.703, 0, 0, 0, 2.51631, -24.6799, -0.41848, -0.438968)
-size = Vector3(1.61443, 0.00548933, 0.006773)
-
-[node name="Floor4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Table"]
-transform = Transform3D(2.059, 0, 0, -6.21725e-15, 1.703, 0, 0, 0, 2.51631, -24.6799, -0.239158, -0.104801)
-size = Vector3(1.61443, 0.00548933, 0.006773)
-
-[node name="Floor5" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Table"]
-transform = Transform3D(2.059, 0, 0, -6.21725e-15, 1.703, 0, 0, 0, 2.51631, -24.6799, -0.41848, -0.104801)
-size = Vector3(1.61443, 0.00548933, 0.006773)
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-6.24339e-08, 4.894, 0, -0.032, -9.54849e-06, 0, 0, 0, 0.025, -2.798, -0.345, 0.219)
+operation = 2
 
 [node name="Pausing" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("4_x187o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3233, 0, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(-3.40497e-08, 1.26152e-06, -44.5583, 3.40497e-08, 28.8602, 1.9477e-06, 0.778967, -1.26151e-06, -1.9477e-06, 0.12272, 13.0002, 33.9373)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/StaticBody3D"]
-transform = Transform3D(1, 0, -9.09495e-13, 1.11022e-16, 1, -1.12609e-14, -1.11022e-16, 1.23753e-15, 1, -26.4705, 2.98023e-08, 2.02563e-08)
-shape = SubResource("BoxShape3D_mlbvo")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(-3.40497e-08, 1.26152e-06, -44.5583, 3.40497e-08, 28.8602, 1.9477e-06, 0.778967, -1.26151e-06, -1.9477e-06, 0.12272, 13.0002, -8.8308)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/StaticBody3D2"]
-transform = Transform3D(1, 0, -1.13687e-12, 1.11022e-16, 1, -1.12609e-14, -1.66533e-16, 1.23753e-15, 1, -8.73566, 1.49012e-07, 6.75209e-09)
-shape = SubResource("BoxShape3D_mlbvo")
-
-[node name="StaticBody3D5" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(-3.40497e-08, 1.26152e-06, -44.5583, 3.40497e-08, 28.8602, 1.9477e-06, 0.778967, -1.26151e-06, -1.9477e-06, 0.12272, 13.0002, -8.8308)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/StaticBody3D5"]
-transform = Transform3D(1, 0, -1.73713e-10, 7.4718e-14, 1, -1.12607e-14, -4.996e-16, 1.23753e-15, 1, 4.01256, -0.406921, 0.0177002)
-shape = SubResource("BoxShape3D_4nbnq")
-debug_color = Color(0.96873, 0.177974, 1.92523e-07, 0.42)
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(-0.778967, 1.26151e-06, 2.22138e-06, 3.40497e-08, 28.8602, 2.26838e-06, -5.96046e-08, 1.26152e-06, -51.8946, -21.3578, 13.0002, 10.5879)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/StaticBody3D3"]
-transform = Transform3D(1, -2.96696e-13, 2.27374e-13, 2.07459e-17, 1, 0, -2.22045e-16, -3.55271e-15, 1, -21.7018, 2.98023e-08, 0)
-shape = SubResource("BoxShape3D_mlbvo")
-
-[node name="StaticBody3D4" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(-0.778967, 1.26151e-06, 2.22138e-06, 3.40497e-08, 28.8602, 2.26838e-06, -5.96046e-08, 1.26152e-06, -51.8946, 21.7177, 13.0002, 10.5879)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/StaticBody3D4"]
-transform = Transform3D(1, -2.96696e-13, 2.27374e-13, 2.07459e-17, 1, 0, -2.22045e-16, -3.55271e-15, 1, 23.6297, -2.98023e-08, -2.98023e-08)
-shape = SubResource("BoxShape3D_mlbvo")
 
 [node name="ColorRect" type="ColorRect" parent="Preview/SubViewportContainer/SubViewport"]
 visible = false
@@ -212,24 +126,13 @@ mouse_force_pass_scroll_events = false
 color = Color(0, 0, 0, 1)
 
 [node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_hq17w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67577, -1.88959, 13.2047)
-target = NodePath("../Cowboy")
+transform = Transform3D(-0.809017, -0.320131, 0.492958, 0, 0.838671, 0.544639, -0.587785, 0.440622, -0.678499, 4.844, 11.07, -9.149)
 speed = 2.0
 
-[node name="CamTarget2" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.757461, 1.36875, -0.819533)
+[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.392726, 0, -0.453615, 0, 0.6, 0, 0.453615, 0, 0.392726, 13.0289, 1.36875, -6.04466)
 gizmo_extents = 4.42
 
 [node name="Ball" parent="Preview/SubViewportContainer/SubViewport" node_paths=PackedStringArray("camera") instance=ExtResource("11_4nbnq")]
-transform = Transform3D(0.355, 0, 0, 0, 0.355, 0, 0, 0, 0.355, -0.589335, 10.0188, 5.88006)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -0.589, 1.369, -2.865)
 camera = NodePath("../CameraSet")
-
-[node name="Cowboy" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("10_tkxv2")]
-transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 0.008, -0.795337, 0.959527, 7.79691)
-
-[node name="wallPaddle" type="Area3D" parent="Preview"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/wallPaddle"]
-transform = Transform3D(3.11, 0, 0, 0, 3.11, 0, 0, 0, 3.11, -0.554083, 8.08641, -15.0301)
-shape = SubResource("BoxShape3D_8mhp7")
-debug_color = Color(0.69, 0.5405, 0, 0.611765)

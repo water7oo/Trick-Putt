@@ -58,7 +58,7 @@ point_count = 3
 radius = 0.75369
 
 [node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("trailEmitter")]
-transform = Transform3D(-1.30743e-09, 0.999553, -0.0299105, 4.36918e-08, 0.0299105, 0.999553, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.17378e-08, 2.95368, -0.088377, 1.29097e-07, 0.088377, 2.95368, 2.955, 3.78579e-08, -1.30287e-07, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_cbx31")
 gravity_scale = 2.5
 script = ExtResource("1_x8fbi")

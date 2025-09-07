@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://7l5yih8w56c3"]
+[gd_scene load_steps=14 format=3 uid="uid://7l5yih8w56c3"]
 
 [ext_resource type="Script" uid="uid://b0vlvthw3ye25" path="res://Scripts/OldScripts/follow_cam.gd" id="1_ch53u"]
 [ext_resource type="Shader" uid="uid://dg0o1j78d3etb" path="res://Shaders/TestingShaders3.gdshader" id="2_h5wb0"]
@@ -37,6 +37,8 @@ _data = {
 &"cam_shake": SubResource("Animation_xr2s2")
 }
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_ch53u"]
+
 [node name="CameraSet" type="Node3D" node_paths=PackedStringArray("spring_arm_pivot") groups=["camera"]]
 script = ExtResource("1_ch53u")
 enabled = true
@@ -53,9 +55,9 @@ shape = SubResource("BoxShape3D_ch53u")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D/Margin"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 0.988067, -0.154021, 0, 0.154021, 0.988067, 0, 0.49919, 22.5221)
+transform = Transform3D(1, 0, 0, 0, 0.988067, -0.154021, 0, 0.154021, 0.988067, 0, -4.41225, 4.94835)
 current = true
-fov = 27.7
+fov = 68.1
 size = 7.078
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpringArmPivot/SpringArm3D/Margin/Camera3D"]
@@ -101,3 +103,11 @@ speed_scale = 1.5
 [node name="GameJuice" type="Node3D" parent="AnimationPlayer"]
 transform = Transform3D(1, 2.32831e-10, 0, 0, 1, -1.86265e-09, 7.45058e-09, 1.86265e-09, 1, 1.86265e-09, -1.19209e-07, 0.0591607)
 script = ExtResource("3_fy3gg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+scale = Vector2(38.285, 38.285)
+texture = SubResource("CanvasTexture_ch53u")
+offset = Vector2(13.63, 9.795)

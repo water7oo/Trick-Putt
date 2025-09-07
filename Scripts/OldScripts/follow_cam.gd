@@ -16,14 +16,15 @@ var is_mouse_visible: bool = true
 @export var period: float = .04
 @export var magnitude: float = 0.08
 
-var y_cam_rot_dist: float = -80
-var x_cam_rot_dist: float = 1
+var y_cam_rot_dist: float = 0
+var x_cam_rot_dist: float = 0
 
 var original_global_transform: Transform3D
 var target_node: Node3D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	target_node = get_node(target) as Node3D
 	
 	#original_global_transform = target_node.global_transform
@@ -32,45 +33,7 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit_game"):
 		print("Quit Game")
 		get_tree().quit()
-	
-	if Input.is_action_just_pressed("mouse_show"):
-		# Toggle the visibility of the mouse
-		if is_mouse_visible:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
-		# Update the state
-		is_mouse_visible = !is_mouse_visible
-		
-
-	if event is InputEventMouseMotion:
-		var rotation_x = spring_arm_pivot.rotation.x - event.relative.y * mouse_sensitivity
-		var rotation_y = spring_arm_pivot.rotation.y - event.relative.x * mouse_sensitivity
-		
-		
-		rotation_x = clamp(rotation_x, deg_to_rad(y_cam_rot_dist), deg_to_rad(x_cam_rot_dist))
-		#rotation_x = clamp(rotation_x, deg_to_rad(-1), deg_to_rad(0))
-		
-		spring_arm_pivot.rotation.x = rotation_x
-		spring_arm_pivot.rotation.y = rotation_y
-		
-		#
-		#if rotation_x <= -1:
-			#camera.set_fov(40)
-		#elif rotation_x >= 0:
-			#camera.set_fov(30)
-		#else:
-			#camera.set_fov(40)
-		
-	#if Input.get_action_strength("cam_down"):
-		#spring_arm_pivot.rotation.x -= joystick_sensitivity
-	#if Input.get_action_strength("cam_up"):
-		#spring_arm_pivot.rotation.x += joystick_sensitivity 
-	#if Input.get_action_strength("cam_right"):
-		#spring_arm_pivot.rotation.y -= joystick_sensitivity 
-	#if Input.get_action_strength("cam_left"):
-		#spring_arm_pivot.rotation.y += joystick_sensitivity 
 
 func _physics_process(delta):
 	followTarget(delta)
