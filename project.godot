@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="PING PONG GAME"
+config/name="TrickPutt"
 config/tags=PackedStringArray("3d", "bloodrush", "thirdperson")
 run/main_scene="res://Game/DevRoomGame.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")

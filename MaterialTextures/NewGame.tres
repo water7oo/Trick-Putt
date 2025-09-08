@@ -1,12 +1,20 @@
-[gd_resource type="Environment" load_steps=2 format=3 uid="uid://cadv2uehcxqkc"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cadv2uehcxqkc"]
 
-[ext_resource type="Sky" uid="uid://duq3mkkmxy2v1" path="res://Game/SKY_Test.tres" id="1_62d6e"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qfage"]
+sky_top_color = Color(0.800828, 1, 0.623953, 1)
+sky_horizon_color = Color(0.535842, 0.887424, 3.85046e-07, 1)
+sky_curve = 0.0989633
+ground_bottom_color = Color(0.75, 0.624, 0.21, 1)
+ground_horizon_color = Color(0.949105, 0.820115, 0.600084, 1)
+ground_curve = 0.278576
+
+[sub_resource type="Sky" id="Sky_62d6e"]
+sky_material = SubResource("ProceduralSkyMaterial_qfage")
 
 [resource]
-background_mode = 1
-background_color = Color(0.84, 0.84, 0.84, 1)
-background_energy_multiplier = 0.53
-sky = ExtResource("1_62d6e")
+background_mode = 2
+background_color = Color(0.954585, 0.898052, 0.730808, 1)
+sky = SubResource("Sky_62d6e")
 ambient_light_source = 2
 ambient_light_color = Color(0.93408, 0.93408, 0.93408, 1)
 ambient_light_sky_contribution = 0.0

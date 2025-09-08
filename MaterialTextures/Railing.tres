@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://qqdmnv224e58"]
+
+[ext_resource type="Texture2D" uid="uid://bdkrvec3wh6qh" path="res://My Textures/TextureGrid_32_devLight.png" id="1_4t0je"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+albedo_color = Color(0.468557, 0.219937, 0.0529173, 1)
+albedo_texture = ExtResource("1_4t0je")
+uv1_scale = Vector3(-3.99, -3.99, -3.99)
+uv1_triplanar_sharpness = 0.233259
+texture_filter = 4

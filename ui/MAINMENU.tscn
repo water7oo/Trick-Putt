@@ -1,0 +1,181 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3c8qi8uxo4yt"]
+
+[ext_resource type="Script" uid="uid://dk00v6dew7sbk" path="res://ui/mainmenu.gd" id="1_keq1y"]
+[ext_resource type="Texture2D" uid="uid://dke0dg1ukuwhj" path="res://ui/TrickPuttUI.png" id="1_yx3mo"]
+[ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_t31ic"]
+[ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="3_keq1y"]
+[ext_resource type="Texture2D" uid="uid://col5fblighg3q" path="res://My Textures/Illustration.png" id="4_aigp2"]
+[ext_resource type="Material" uid="uid://dcuvjs33ebpe3" path="res://MaterialTextures/Room.tres" id="5_pql6l"]
+[ext_resource type="Texture2D" uid="uid://cw62ygditxxqv" path="res://addons/kenney_prototype_textures/light/texture_01.png" id="6_riqra"]
+[ext_resource type="PackedScene" uid="uid://brejidgy2nq2j" path="res://ui/Pausing.tscn" id="7_e0k40"]
+[ext_resource type="Shader" uid="uid://b1hg6btlggl78" path="res://TRASH/uhhhhh.gdshader" id="8_t6p7i"]
+[ext_resource type="PackedScene" uid="uid://7l5yih8w56c3" path="res://Player/Scenes/PlayerCamera.tscn" id="9_ou271"]
+[ext_resource type="PackedScene" uid="uid://s7e7l3au1xci" path="res://Player/Ball/ball.tscn" id="10_e6o40"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlemm"]
+shader = ExtResource("2_t31ic")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 4
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 2
+shader_parameter/enable_recolor = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17148"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_aigp2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jndcv"]
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.67
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg45g"]
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+albedo_color = Color(0.376057, 0.392551, 0, 1)
+albedo_texture = ExtResource("6_riqra")
+uv1_scale = Vector3(-9.42, -9.42, -9.42)
+uv1_triplanar_sharpness = 0.233259
+texture_filter = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scpky"]
+shader = ExtResource("8_t6p7i")
+shader_parameter/speedScale = 50.875
+shader_parameter/clipPosition = 0.2
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_keq1y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1032.0
+offset_bottom = 779.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(507, 387)
+scale = Vector2(0.885, 0.885)
+texture = ExtResource("1_yx3mo")
+
+[node name="Preview" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Preview"]
+material = SubResource("ShaderMaterial_wlemm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("3_keq1y")]
+position = Vector2(0, -4.00001)
+
+[node name="SubViewport" type="SubViewport" parent="Preview/SubViewportContainer"]
+handle_input_locally = false
+scaling_3d_mode = 0
+canvas_item_default_texture_filter = 0
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Hole2" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.786995, 0.00169624, 0, 8.85142e-10, 18.9858, 0, 0, 0, 0.765497, -0.0109053, 0.583519, 19.8415)
+visible = false
+material_override = SubResource("StandardMaterial3D_17148")
+operation = 2
+height = 0.326187
+
+[node name="Floor" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55995e-06, 0, 0, 0, 44.9384, -12.3233, 1.15208, 10)
+material_overlay = ExtResource("5_pql6l")
+operation = 1
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="Floor" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(11.342, -6.82121e-13, 0, 1.77636e-15, 1.633, 0, 0, 0, 8.724, -28.904, -0.338571, -0.20239)
+material_override = SubResource("StandardMaterial3D_jndcv")
+size = Vector3(5.00703, 0.109828, 0.0351485)
+
+[node name="Hole" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-4.29233e-08, 3.309, 0, -0.022, -6.45606e-06, 0, 0, 0, 0.017, -0.729891, -0.345004, -0.0837608)
+operation = 2
+height = 0.326187
+
+[node name="walls" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55996e-06, 0, 0, 0, 44.9384, -12.323, -0.137, 10)
+material_overlay = SubResource("StandardMaterial3D_dg45g")
+operation = 1
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="wall" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(-5.61142e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.252652, -0.249506, -0.207892)
+size = Vector3(0.364502, 1, 14.0921)
+
+[node name="wall2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(-5.61142e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.252652, -0.430783, -0.207995)
+size = Vector3(0.364502, 1, 14.0828)
+
+[node name="wall3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252653, -0.334559, -0.0527423)
+size = Vector3(0.364502, 1, 7.50741)
+
+[node name="wall4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252652, -0.328349, -0.35737)
+size = Vector3(0.364502, 1, 7.52892)
+
+[node name="Pausing" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("7_e0k40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3233, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preview/SubViewportContainer/SubViewport"]
+visible = false
+material = SubResource("ShaderMaterial_scpky")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+color = Color(0, 0, 0, 1)
+
+[node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("9_ou271")]
+transform = Transform3D(-0.809017, -0.320131, 0.492958, 0, 0.838671, 0.544639, -0.587785, 0.440622, -0.678499, 4.844, 9.6, -9.149)
+target = NodePath("../Ball/CT1")
+speed = 2.0
+
+[node name="Ball" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("10_e6o40")]
+transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -0.0111901, 0.928135, -3.01789)
+
+[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport/Ball"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 3.63763, 10.9495, 0.847166)
+gizmo_extents = 4.42
+
+[node name="PlayButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 10
+
+[node name="Play" type="Button" parent="PlayButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "PLAY"

@@ -19,7 +19,7 @@ var smash_gradient := preload("res://Player/Ball/ballMaterialSMASH.tres")
 @export var force: float = 25.0
 @export var opponentForce: float = 25.0
 @export var smashForce: float = 100
-@export var camera: Node3D
+@export var camera: Camera3D
 @export var maxSpeed: float = 30.0
 @export var smashSteepness: float = .5
 
@@ -37,19 +37,41 @@ var WALL_BOUNCE_ANGLES := [
 @export var DEPTH_ARC_MULTIPLIER: float = 0.4
 @export var FORWARD_ARC_REDUCTION: float = 0.5
 
-# --- New variables for drag/launch mechanic ---
+# --- Drag/launch mechanic ---
 var is_dragging := false
 var drag_start := Vector2.ZERO
 var drag_end := Vector2.ZERO
 @export var drag_power_scale := 0.05   # tweak shot power multiplier
 
+
+@onready var drag_line: Line2D = $Dragline/Line2D
+
 func _ready():
 	contact_monitor = true
 	max_contacts_reported = 4
 
+	# If camera not assigned manually, find the active one
+	if camera == null:
+		camera = get_viewport().get_camera_3d()
+
 func _physics_process(delta: float) -> void:
 	ballSpeedLabel.text = "BALL SPEED: " + str(snapped(linear_velocity.length(), 0.1))
-	bounceDebug()
+	
+	if is_dragging:
+		var current_mouse = get_viewport().get_mouse_position()
+		drag_line.visible = true
+		
+		# Calculate the drag vector
+		var drag_vector = drag_start - current_mouse
+		
+		# Optionally scale the line for visual effect
+		var visual_vector = drag_vector * 2.0  # Multiply to exaggerate strength
+		
+		# Update the line points
+		drag_line.points = [drag_start, drag_start + visual_vector]
+	else:
+		drag_line.visible = false
+	#bounceDebug()
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var contact_count = state.get_contact_count()
@@ -76,53 +98,61 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		linear_velocity = linear_velocity.normalized() * maxSpeed
 
 func _input(event):
+	if camera == null:
+		return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			# Cast a ray from the camera through the mouse position
 			var mouse_pos = get_viewport().get_mouse_position()
-			var from = camera.project_ray_origin(mouse_pos)
-			var to = from + camera.project_ray_normal(mouse_pos) * 1000.0
-
-			var space_state = get_world_3d().direct_space_state
-			var query = PhysicsRayQueryParameters3D.create(from, to)
-			var result = space_state.intersect_ray(query)
-
-			# Only start dragging if the ray hit THIS ball
-			if result and result.collider == self:
+			if _is_mouse_over_ball(mouse_pos):
 				is_dragging = true
 				drag_start = mouse_pos
 
 		elif is_dragging and not event.pressed:
-			# Only release if dragging was started on the ball
 			is_dragging = false
 			drag_end = get_viewport().get_mouse_position()
 			var drag_vector = drag_start - drag_end
 			launch_ball(drag_vector)
+
+func _is_mouse_over_ball(mouse_pos: Vector2) -> bool:
+	if BallMesh == null:
+		return false
+
+	# Project ball's global position to 2D screen space
+	var ball_screen_pos = camera.unproject_position(BallMesh.global_transform.origin)
+
+	# Calculate distance from mouse to projected position
+	var distance = mouse_pos.distance_to(ball_screen_pos)
+
+	# Set a clickable radius (in pixels)
+	var click_radius = 50  # adjust as needed
+
+	return distance <= click_radius
 
 
 # --- Launch function ---
 func launch_ball(drag_vector: Vector2):
 	var power = drag_vector.length() * drag_power_scale
 	if power <= 0.1:
-		return # ignore tiny clicks
+		return # ignore tiny drags
 
 	var cam_basis = camera.global_transform.basis
 	var forward = -cam_basis.z.normalized()
 	var right = cam_basis.x.normalized()
 
-	var launch_dir = (forward * drag_vector.y + right * drag_vector.x).normalized()
+	var launch_dir = (-forward * drag_vector.y + right * drag_vector.x).normalized()
 
 	linear_velocity = Vector3.ZERO
 	apply_impulse(launch_dir * power)
 
 	BallHit.play()
 
-# --- Existing helpers ---
-func bounceDebug():
-	if Input.is_action_just_pressed("debug_Bounce_horizontal") and camera:
-		var spring_arm = camera.spring_arm_pivot
-		var direction = -spring_arm.global_transform.basis.z.normalized()
-		apply_impulse(direction * hforce)
+## --- Helpers ---
+#func bounceDebug():
+	#if Input.is_action_just_pressed("debug_Bounce_horizontal") and camera:
+		#var spring_arm = camera.spring_arm_pivot
+		#var direction = -spring_arm.global_transform.basis.z.normalized()
+		#apply_impulse(direction * hforce)
 
 func spawn_surface_effect(pos: Vector3, normal: Vector3) -> void:
 	if surface_effect_scene:
@@ -137,7 +167,7 @@ func spawn_surface_effect(pos: Vector3, normal: Vector3) -> void:
 		effect.global_transform.basis = Basis(right, up, -forward)
 
 func spawn_hit_effect_at_area(area: Node3D):
-	if hit1 and area && Global.isSwing:
+	if hit1 and area and Global.isSwing:
 		var hit_effect = hit1.instantiate()
 		get_parent().add_child(hit_effect)
 		hit_effect.global_transform.origin = area.global_transform.origin + Vector3.UP * 0.2
