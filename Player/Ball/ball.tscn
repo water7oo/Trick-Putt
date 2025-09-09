@@ -16,7 +16,8 @@ friction = 0.0
 bounce = 0.65
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbx31"]
-shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_x8fbi"]
 

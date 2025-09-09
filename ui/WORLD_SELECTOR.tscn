@@ -1,0 +1,160 @@
+[gd_scene load_steps=19 format=3 uid="uid://c24khsjnfv1r0"]
+
+[ext_resource type="Script" uid="uid://dclas062feutm" path="res://ui/WORLDS.gd" id="1_0vwef"]
+[ext_resource type="Material" uid="uid://cnk8iniwyiaiu" path="res://ui/WORLD_SELECTOR.tres" id="1_trm4j"]
+[ext_resource type="Texture2D" uid="uid://c535up4a5y5jc" path="res://My Textures/2.jpg" id="2_lig4d"]
+[ext_resource type="Texture2D" uid="uid://dauoslwv2ek2h" path="res://My Textures/3.jpg" id="3_0vwef"]
+[ext_resource type="Texture2D" uid="uid://b11rqo0lf5qok" path="res://My Textures/4.jpg" id="4_ybmu8"]
+[ext_resource type="Texture2D" uid="uid://1qoby2faqdem" path="res://My Textures/5.jpg" id="5_eecp1"]
+[ext_resource type="Texture2D" uid="uid://bbvh81mn5k78u" path="res://My Textures/6.jpg" id="6_q2a26"]
+[ext_resource type="Texture2D" uid="uid://dyyreot3qra0o" path="res://My Textures/7.jpg" id="7_bo1ab"]
+[ext_resource type="Texture2D" uid="uid://05vec8yqk2rp" path="res://My Textures/8.jpg" id="8_ty1rs"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_trm4j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lig4d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrjpe"]
+shading_mode = 0
+albedo_texture = ExtResource("2_lig4d")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmwgo"]
+shading_mode = 0
+albedo_texture = ExtResource("3_0vwef")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5t0cr"]
+shading_mode = 0
+albedo_texture = ExtResource("4_ybmu8")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6ais"]
+shading_mode = 0
+albedo_texture = ExtResource("5_eecp1")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apign"]
+shading_mode = 0
+albedo_texture = ExtResource("6_q2a26")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h61li"]
+shading_mode = 0
+albedo_texture = ExtResource("7_bo1ab")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b624x"]
+shading_mode = 0
+albedo_texture = ExtResource("8_ty1rs")
+uv1_scale = Vector3(1.935, 1.935, 1.935)
+uv1_offset = Vector3(0, -0.355, 0)
+
+[node name="WORLD" type="Node3D" node_paths=PackedStringArray("world_nodes")]
+script = ExtResource("1_0vwef")
+world_nodes = [NodePath("worlds/1"), NodePath("worlds/2"), NodePath("worlds/3"), NodePath("worlds/4"), NodePath("worlds/5"), NodePath("worlds/6"), NodePath("worlds/7"), NodePath("worlds/8")]
+
+[node name="worlds" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="1" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(1.44, 0, 0, 0, 1.44, 0, 0, 0, 1.44, -3, 0, 0)
+material_override = ExtResource("1_trm4j")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world1" type="Area3D" parent="worlds/1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/1/world1"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="2" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(1.01823, 0, 1.01823, 0, 1.44, 0, -1.01823, 0, 1.01823, -2, 0, 2)
+material_override = SubResource("StandardMaterial3D_nrjpe")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world2" type="Area3D" parent="worlds/2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/2/world2"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="3" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(-6.29444e-08, 0, 1.44, 0, 1.44, 0, -1.44, 0, -6.29444e-08, 0, 0, 3)
+material_override = SubResource("StandardMaterial3D_dmwgo")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world3" type="Area3D" parent="worlds/3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/3/world3"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="4" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(-1.01823, 0, 1.01823, 0, 1.44, 0, -1.01823, 0, -1.01823, 2, 0, 2)
+material_override = SubResource("StandardMaterial3D_5t0cr")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world4" type="Area3D" parent="worlds/4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/4/world4"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="5" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(-1.44, 0, -1.25889e-07, 0, 1.44, 0, 1.25889e-07, 0, -1.44, 3, 0, 0)
+material_override = SubResource("StandardMaterial3D_l6ais")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world5" type="Area3D" parent="worlds/5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/5/world5"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="6" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(-1.01823, 0, -1.01823, 0, 1.44, 0, 1.01823, 0, -1.01823, 2, 0, -2)
+material_override = SubResource("StandardMaterial3D_apign")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world6" type="Area3D" parent="worlds/6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/6/world6"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="7" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(1.71718e-08, 0, -1.44, 0, 1.44, 0, 1.44, 0, 1.71718e-08, 0, 0, -3)
+material_override = SubResource("StandardMaterial3D_h61li")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world7" type="Area3D" parent="worlds/7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/7/world7"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
+
+[node name="8" type="MeshInstance3D" parent="worlds"]
+transform = Transform3D(1.01823, 0, -1.01823, 0, 1.44, 0, 1.01823, 0, 1.01823, -2, 0, -2)
+material_override = SubResource("StandardMaterial3D_b624x")
+mesh = SubResource("SphereMesh_trm4j")
+skeleton = NodePath("../..")
+
+[node name="world8" type="Area3D" parent="worlds/8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worlds/8/world8"]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0, 0)
+shape = SubResource("SphereShape3D_lig4d")
