@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3c8qi8uxo4yt"]
+[gd_scene load_steps=16 format=3 uid="uid://c3c8qi8uxo4yt"]
 
 [ext_resource type="Script" uid="uid://dk00v6dew7sbk" path="res://ui/mainmenu.gd" id="1_keq1y"]
 [ext_resource type="Texture2D" uid="uid://dke0dg1ukuwhj" path="res://ui/TrickPuttUI.png" id="1_yx3mo"]
-[ext_resource type="AudioStream" uid="uid://btlq1xamaurjx" path="res://Sounds/tick_001.ogg" id="2_01rn4"]
+[ext_resource type="PackedScene" uid="uid://dh3mtpi2x4067" path="res://ui/World1Levels.tscn" id="2_keq1y"]
 [ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_t31ic"]
 [ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="3_keq1y"]
-[ext_resource type="AudioStream" uid="uid://bv0aex0lqv8eo" path="res://Sounds/swing-whoosh-5-198498.mp3" id="3_t31ic"]
 [ext_resource type="PackedScene" uid="uid://c24khsjnfv1r0" path="res://ui/WORLD_SELECTOR.tscn" id="5_6t2ki"]
 [ext_resource type="PackedScene" uid="uid://phbvdv0qhtg7" path="res://ui/worldsOverlay.tscn" id="5_d87oo"]
 [ext_resource type="Shader" uid="uid://dg0o1j78d3etb" path="res://Shaders/TestingShaders3.gdshader" id="6_4nfc5"]
@@ -21,6 +20,7 @@ shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4nfc5"]
+size = Vector3(1, 1, 1.30664)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_01rn4"]
 render_priority = 0
@@ -39,7 +39,7 @@ uv1_scale = Vector3(-5.155, -5.155, -5.155)
 
 [sub_resource type="QuadMesh" id="QuadMesh_bx2uu"]
 
-[node name="MAINMENU" type="Node3D" node_paths=PackedStringArray("playButton", "worldSelector", "backMainMenu", "worldSelectScroll", "worldTransition", "worldReader", "titleScreen", "rWorldSelectBtn", "lWorldSelectBtn", "worldsOverlay", "start_pos", "end_pos")]
+[node name="MAINMENU" type="Node3D" node_paths=PackedStringArray("playButton", "worldSelector", "backMainMenu", "worldSelectScroll", "worldTransition", "worldReader", "titleScreen", "rWorldSelectBtn", "lWorldSelectBtn", "worldsOverlay", "worldSelectPos", "camerPivot", "fade_overlay", "start_pos", "end_pos")]
 script = ExtResource("1_keq1y")
 playButton = NodePath("PlayButtonContainer/Play")
 worldSelector = NodePath("Preview/SubViewportContainer/SubViewport/Worlds")
@@ -51,14 +51,39 @@ titleScreen = NodePath("Preview/SubViewportContainer/TITLE")
 rWorldSelectBtn = NodePath("RightWorldSelect2/RWorldSelect")
 lWorldSelectBtn = NodePath("LeftWorldSelect/LWorldSelect")
 worldsOverlay = NodePath("Preview/SubViewportContainer/WorldsOverlay")
+worldSelectPos = NodePath("WorldSelectMarkPos")
+camerPivot = NodePath("Preview/SubViewportContainer/SubViewport/CamPivot")
+world1Scene = ExtResource("2_keq1y")
+fade_overlay = NodePath("SceneTransition/FadeTransition")
 start_pos = NodePath("WorldsStartMark")
 end_pos = NodePath("WorldsEndMark")
 
 [node name="worldSelectScroll" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_01rn4")
 
 [node name="worldTransition" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_t31ic")
+
+[node name="WorldsStartMark" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.6353, 0, -6)
+gizmo_extents = 4.95
+
+[node name="WorldSelectMarkPos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.00676, -11.9013)
+gizmo_extents = 4.95
+
+[node name="WorldsEndMark" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+gizmo_extents = 5.39
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+
+[node name="FadeTransition" type="ColorRect" parent="SceneTransition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.192157, 0.184314, 0.203922, 1)
 
 [node name="Preview" type="Control" parent="."]
 layout_mode = 3
@@ -87,13 +112,11 @@ position = Vector2(507, 419)
 scale = Vector2(0.885, 0.885)
 texture = ExtResource("1_yx3mo")
 
-[node name="WorldsOverlay" parent="Preview/SubViewportContainer" instance=ExtResource("5_d87oo")]
-visible = false
-position = Vector2(0, 32)
-
 [node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("3_keq1y")]
-visible = false
 position = Vector2(0, -4.00001)
+
+[node name="WorldsOverlay" parent="Preview/SubViewportContainer" instance=ExtResource("5_d87oo")]
+position = Vector2(0, 32)
 
 [node name="SubViewport" type="SubViewport" parent="Preview/SubViewportContainer"]
 handle_input_locally = false
@@ -106,29 +129,34 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/WorldReader"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.54432)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.391)
 shape = SubResource("BoxShape3D_4nfc5")
 
 [node name="Worlds" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("5_6t2ki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.635, 0, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, -6)
 
-[node name="Camera3D2" type="Camera3D" parent="Preview/SubViewportContainer/SubViewport"]
+[node name="CamPivot" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52515, -6)
+gizmo_extents = 8.75
+
+[node name="Camera3D2" type="Camera3D" parent="Preview/SubViewportContainer/SubViewport/CamPivot"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.52515, 0)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -1.19209e-07, 6)
 current = true
 fov = 68.1
 size = 7.078
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Camera3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/CamPivot/Camera3D2"]
 transform = Transform3D(2, -2.32831e-10, -5.96046e-08, 2.32831e-10, 2, 0, 0, 0, 2, 0.0447144, -0.107597, -1.45398)
 material_override = SubResource("ShaderMaterial_01rn4")
 mesh = SubResource("QuadMesh_d87oo")
-skeleton = NodePath("../../../../..")
+skeleton = NodePath("../../../../../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(30.9279, 0, 0, 0, 30.5136, 0, 0, 0, 5.44, 0, 0, -11.9692)
+[node name="BACKGROUND" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/CamPivot/Camera3D2"]
+transform = Transform3D(30.9279, 0, 0, 0, 29.4738, -1.40798, 0, 7.89749, 5.25464, 0, 1.62468, -11.9561)
 material_override = SubResource("StandardMaterial3D_bx2uu")
 mesh = SubResource("QuadMesh_bx2uu")
+skeleton = NodePath("../../..")
 
 [node name="PlayButtonContainer" type="VBoxContainer" parent="."]
 offset_left = 456.0
@@ -144,19 +172,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "PLAY"
 
-[node name="WorldsStartMark" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.6353, 0, -6)
-gizmo_extents = 4.95
-
-[node name="WorldsEndMark" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-gizmo_extents = 5.39
-
 [node name="LeftWorldSelect" type="VBoxContainer" parent="."]
 offset_left = 943.0
 offset_top = 316.0
-offset_right = 990.0
-offset_bottom = 356.0
+offset_right = 1002.0
+offset_bottom = 366.0
 
 [node name="LWorldSelect" type="Button" parent="LeftWorldSelect"]
 layout_mode = 2
@@ -168,8 +188,8 @@ text = ">>>"
 [node name="RightWorldSelect2" type="VBoxContainer" parent="."]
 offset_left = 23.0
 offset_top = 320.0
-offset_right = 70.0
-offset_bottom = 360.0
+offset_right = 82.0
+offset_bottom = 370.0
 
 [node name="RWorldSelect" type="Button" parent="RightWorldSelect2"]
 layout_mode = 2
@@ -193,6 +213,7 @@ text = "BACK
 "
 
 [connection signal="area_entered" from="Preview/SubViewportContainer/SubViewport/WorldReader" to="." method="_on_world_reader_area_entered"]
+[connection signal="area_exited" from="Preview/SubViewportContainer/SubViewport/WorldReader" to="." method="_on_world_reader_area_exited"]
 [connection signal="pressed" from="PlayButtonContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="LeftWorldSelect/LWorldSelect" to="." method="_on_l_world_select_pressed"]
 [connection signal="pressed" from="RightWorldSelect2/RWorldSelect" to="." method="_on_r_world_select_pressed"]

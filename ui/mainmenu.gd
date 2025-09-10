@@ -10,17 +10,23 @@ extends Node3D
 @export var rWorldSelectBtn: Button
 @export var lWorldSelectBtn: Button
 @export var worldsOverlay: Node2D
+@export var worldSelectPos: Marker3D
+@export var camerPivot: Marker3D
+@export var World1Selector: Node2D
+@export var world1Scene: PackedScene 
+
+@export var fade_overlay: ColorRect 
 
 @export var start_pos: Marker3D
 @export var end_pos: Marker3D
 
+# Stores the string of the selected world
+var WorldSelectName: String = ""
+var hovered_world: String = ""   # <- Track the world the reader is currently over
 
-#Stores the string of the selected world, attach this string to some sort of 
-# scene or chunk that willl transition in based on this value
-var WorldSelectName = 0
-var rotation_speed = 0.3
-var world_move_speed = 0.4
-var displayWorldSelect = false
+var rotation_speed := 0.3
+var world_move_speed := 0.4
+var displayWorldSelect := false
 
 # Keep track of the current rotation step
 var rotation_index := 0
@@ -29,17 +35,38 @@ var rotation_index := 0
 func _ready() -> void:
 	# Start worldSelector at the right spot
 	worldSelector.position = start_pos.position
+	fade_overlay.visible = true
+	fade_overlay.modulate.a = 1.0
+	var tween := create_tween()
+	tween.tween_property(fade_overlay, "modulate:a", 0.0, 0.5)
 
-func _process(delta: float)-> void:
+
+
+func fade_to_scene(scene_path: String) -> void:
+	fade_overlay.visible = true
+	fade_overlay.modulate.a = 0.0
 	
-	rotateWorldsInput()
-	selectWorld()
+	var tween := create_tween()
+	tween.tween_property(fade_overlay, "modulate:a", 1.0, 0.5) # fade out
+	tween.finished.connect(func ():
+		get_tree().change_scene_to_file(scene_path)
+	)
+func _process(delta: float) -> void:
+	if displayWorldSelect:
+		rotateWorldsInput()
+		selectWorld()
+
+
+
+func selectWorld() -> void:
+	if Input.is_action_just_pressed("Select") and hovered_world != "":
+		WorldSelectName = hovered_world
+		print("Player has selected world " + WorldSelectName)
+		
+		
+		if WorldSelectName == "world1":
+			fade_to_scene("res://ui/World1Levels.tscn") 
 	
-func selectWorld():
-	
-	if Input.is_action_just_pressed("Select"):
-		print("selected world")
-	pass
 func _on_play_pressed() -> void:
 	print("pressed button")
 	displayWorldSelect = true
@@ -62,15 +89,19 @@ func _on_play_pressed() -> void:
 		world_move_speed
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-func rotateWorldsInput():
-	
+
+	hovered_world = "world1"
+	print("Default highlight -> " + hovered_world)
+
+
+func rotateWorldsInput() -> void:
 	if Input.is_action_just_pressed("move_left"):
 		rotation_index += 1
 		_tween_rotation()
 	elif Input.is_action_just_pressed("move_right"):
 		rotation_index -= 1
 		_tween_rotation()
-	
+
 
 func _on_r_world_select_pressed() -> void:
 	rotation_index += 1
@@ -108,7 +139,7 @@ func _on_back_main_menu_pressed() -> void:
 
 func _tween_rotation() -> void:
 	worldSelectScroll.play()
-	# Tween worldSelector rotation in 90° increments
+	# Tween worldSelector rotation in 45° increments
 	var tween := create_tween()
 	tween.tween_property(
 		worldSelector,
@@ -117,25 +148,12 @@ func _tween_rotation() -> void:
 		rotation_speed
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+func _on_world_reader_area_entered(area: Area3D) -> void:
+	if displayWorldSelect:
+		hovered_world = area.name
+		print(hovered_world + " highlighted")
 
-func _on_world_reader_area_entered(area):
-	if displayWorldSelect == true:
-		if area.name == "world1":
-			print("world1 selected")
-			WorldSelectName = area.name
-		elif area.name == "world2":
-			print("world2 selected")
-		elif area.name == "world3":
-			print("world3 selected")
-		elif area.name == "world4":
-			print("world4 selected")
-		elif area.name == "world5":
-			print("world5 selected")
-		elif area.name == "world6":
-			print("world6 selected")
-		elif area.name == "world7":
-			print("world7 selected")
-		elif area.name == "world8":
-			print("world8 selected")
 
-	pass # Replace with function body.
+func _on_world_reader_area_exited(area: Area3D) -> void:
+	if hovered_world == area.name:
+		hovered_world = ""  # Clear if reader leaves the world

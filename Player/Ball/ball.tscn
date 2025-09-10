@@ -1,18 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://s7e7l3au1xci"]
+[gd_scene load_steps=22 format=3 uid="uid://s7e7l3au1xci"]
 
 [ext_resource type="Script" uid="uid://wuovol8q5s4x" path="res://Player/Ball/ball.gd" id="1_x8fbi"]
 [ext_resource type="PackedScene" uid="uid://b1cetjognw8y6" path="res://FX/DustWave2.tscn" id="2_avp1e"]
-[ext_resource type="AudioStream" uid="uid://dfgotdg07cird" path="res://Sounds/Sample_0010.wav" id="3_43ivl"]
-[ext_resource type="AudioStream" uid="uid://bhb1xbkn3lukx" path="res://Sounds/Sample_0004.wav" id="3_ftaac"]
 [ext_resource type="Gradient" uid="uid://brlyvoi2s3fa2" path="res://Player/Ball/balltrailDefaultSMASH.tres" id="3_il2rs"]
 [ext_resource type="FontFile" uid="uid://cg2l5vxyisqd1" path="res://ui/mario-kart-ds-oultine-font/mario-kart-ds-oultine-font.ttf" id="4_d4s7q"]
 [ext_resource type="Gradient" uid="uid://5vsiwdjoyf02" path="res://Player/Ball/balltrailDefault.tres" id="5_43ivl"]
 [ext_resource type="PackedScene" uid="uid://ugdlxfbar3wk" path="res://FX/hit_1.tscn" id="6_kp8ei"]
 [ext_resource type="Material" uid="uid://bldkvyovb0dws" path="res://Player/Ball/ballMaterialSMASH.tres" id="7_b557h"]
+[ext_resource type="AudioStream" uid="uid://bvxhnl6dkh3ek" path="res://Sounds/footstep_carpet_003.ogg" id="7_kp8ei"]
 [ext_resource type="Material" uid="uid://ldhitxh53ql3" path="res://Player/Ball/ballMaterial.tres" id="8_ngs66"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbx31"]
-friction = 0.0
 bounce = 0.65
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbx31"]
@@ -69,6 +67,7 @@ ballDefaultTrailSmash = ExtResource("3_il2rs")
 ballDefaultTrailSmash2 = ExtResource("7_b557h")
 surface_effect_scene = ExtResource("2_avp1e")
 hit1 = ExtResource("6_kp8ei")
+vforce = 0.0
 hforce = 30.0
 force = 20.0
 smashForce = 30.0
@@ -95,11 +94,11 @@ shape = SubResource("SphereShape3D_cbx31")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("3_43ivl")
+stream = ExtResource("7_kp8ei")
 
 [node name="BallBounce" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("3_ftaac")
+stream = ExtResource("7_kp8ei")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.28408e-08, -1, -4.37114e-08, 1, -4.28408e-08, 0, 0, 0)

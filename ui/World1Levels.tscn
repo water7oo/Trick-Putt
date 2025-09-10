@@ -1,0 +1,175 @@
+[gd_scene load_steps=14 format=3 uid="uid://dh3mtpi2x4067"]
+
+[ext_resource type="Script" uid="uid://r0sg4cc2ec3t" path="res://ui/world_1_levels.gd" id="1_buwff"]
+[ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_8u4il"]
+[ext_resource type="Texture2D" uid="uid://bfnab31ns8f7g" path="res://My Textures/tutorialLevel_TV.png" id="3_sehnj"]
+[ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="4_61css"]
+[ext_resource type="PackedScene" uid="uid://uwgpswcjlqob" path="res://ui/WORLD1_EDITOR.tscn" id="5_lj5b6"]
+[ext_resource type="PackedScene" uid="uid://dji1l5rpxpqhh" path="res://ui/WORLD1_UIOVERLAY.tscn" id="5_rco16"]
+[ext_resource type="Shader" uid="uid://dg0o1j78d3etb" path="res://Shaders/TestingShaders3.gdshader" id="8_f3vie"]
+[ext_resource type="Texture2D" uid="uid://b371bs0t0y4nb" path="res://My Textures/bgWorlds.jpg" id="9_vgt1o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlemm"]
+shader = ExtResource("2_8u4il")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 4
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 2
+shader_parameter/enable_recolor = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01rn4"]
+render_priority = 0
+shader = ExtResource("8_f3vie")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/sensitivity = 100.0
+shader_parameter/thickness = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_d87oo"]
+size = Vector2(2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx2uu"]
+shading_mode = 0
+albedo_texture = ExtResource("9_vgt1o")
+uv1_scale = Vector3(-5.155, -5.155, -5.155)
+
+[sub_resource type="QuadMesh" id="QuadMesh_bx2uu"]
+
+[node name="WORLD1" type="Node3D" node_paths=PackedStringArray("fade_overlay", "levelSelector", "level_markers")]
+script = ExtResource("1_buwff")
+fade_overlay = NodePath("SceneTransition/FadeTransition")
+levelSelector = NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/LevelSelect")
+level_markers = [NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv1"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv2"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv3"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv4"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv5")]
+
+[node name="worldSelectScroll" type="AudioStreamPlayer" parent="."]
+
+[node name="worldTransition" type="AudioStreamPlayer" parent="."]
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="FadeTransition" type="ColorRect" parent="SceneTransition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.192157, 0.184314, 0.203922, 1)
+
+[node name="Preview" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Preview"]
+material = SubResource("ShaderMaterial_wlemm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TUTORIAL_CHANNEL" type="Sprite2D" parent="Preview/SubViewportContainer"]
+visible = false
+position = Vector2(514, 417)
+texture = ExtResource("3_sehnj")
+
+[node name="LEVELSELECTOR1" parent="Preview/SubViewportContainer" instance=ExtResource("5_lj5b6")]
+position = Vector2(0, 32)
+
+[node name="lv5" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
+position = Vector2(881.3, 483.3)
+gizmo_extents = 108.3
+
+[node name="lv4" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
+position = Vector2(683.3, 483.3)
+gizmo_extents = 108.3
+
+[node name="lv3" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
+position = Vector2(499.3, 483.3)
+gizmo_extents = 108.3
+
+[node name="lv2" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
+position = Vector2(317.3, 483.3)
+gizmo_extents = 108.3
+
+[node name="lv1" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
+position = Vector2(136.3, 483.3)
+gizmo_extents = 108.3
+
+[node name="LevelSelect" type="Label" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 102.0
+offset_top = 494.0
+offset_right = 172.0
+offset_bottom = 605.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 81
+text = "▼"
+
+[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("4_61css")]
+position = Vector2(0, -4.00001)
+
+[node name="OVERLAY" parent="Preview/SubViewportContainer" instance=ExtResource("5_rco16")]
+position = Vector2(0, 32)
+
+[node name="SubViewport" type="SubViewport" parent="Preview/SubViewportContainer"]
+handle_input_locally = false
+scaling_3d_mode = 0
+canvas_item_default_texture_filter = 0
+size = Vector2i(1024, 768)
+render_target_update_mode = 4
+
+[node name="CamPivot" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52515, -6)
+gizmo_extents = 8.75
+
+[node name="Camera3D2" type="Camera3D" parent="Preview/SubViewportContainer/SubViewport/CamPivot"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -1.19209e-07, 6)
+current = true
+fov = 68.1
+size = 7.078
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/CamPivot/Camera3D2"]
+transform = Transform3D(2, -2.32831e-10, -5.96046e-08, 2.32831e-10, 2, 0, 0, 0, 2, 0.0447144, -0.107597, -1.45398)
+material_override = SubResource("ShaderMaterial_01rn4")
+mesh = SubResource("QuadMesh_d87oo")
+skeleton = NodePath("../../../../../..")
+
+[node name="BACKGROUND" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/CamPivot/Camera3D2"]
+transform = Transform3D(30.9279, 0, 0, 0, 29.4738, -1.40798, 0, 7.89749, 5.25464, 0, 1.62468, -11.9561)
+material_override = SubResource("StandardMaterial3D_bx2uu")
+mesh = SubResource("QuadMesh_bx2uu")
+skeleton = NodePath("../../..")
+
+[node name="BackMainMenu" type="VBoxContainer" parent="."]
+offset_left = -23.0
+offset_top = 39.0
+offset_right = 135.0
+offset_bottom = 124.0
+
+[node name="BackMain Menu" type="Button" parent="BackMainMenu"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+action_mode = 0
+text = "BACK
+"
+
+[connection signal="pressed" from="BackMainMenu/BackMain Menu" to="." method="_on_back_main_menu_pressed"]

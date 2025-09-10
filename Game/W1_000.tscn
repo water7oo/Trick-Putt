@@ -1,21 +1,23 @@
-[gd_scene load_steps=22 format=3 uid="uid://b2ud3ury8epgi"]
+[gd_scene load_steps=27 format=3 uid="uid://b2ud3ury8epgi"]
 
-[ext_resource type="AudioStream" uid="uid://bga1nc78cl5p3" path="res://Sounds/funk id.mp3" id="1_6d680"]
-[ext_resource type="Environment" uid="uid://cadv2uehcxqkc" path="res://MaterialTextures/NewGame.tres" id="1_c0qo6"]
-[ext_resource type="Material" uid="uid://dcuvjs33ebpe3" path="res://MaterialTextures/Room.tres" id="1_ewgn2"]
-[ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_nbohg"]
-[ext_resource type="Shader" uid="uid://dvak82lgkrk1o" path="res://Shaders/scrollingTexture.gdshader" id="3_4nbnq"]
-[ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="4_rsb4y"]
-[ext_resource type="PackedScene" uid="uid://brejidgy2nq2j" path="res://ui/Pausing.tscn" id="4_x187o"]
-[ext_resource type="PackedScene" uid="uid://gj8ykdhfcr2h" path="res://ui/tut_ui.tscn" id="6_8mhp7"]
-[ext_resource type="Texture2D" uid="uid://cw62ygditxxqv" path="res://addons/kenney_prototype_textures/light/texture_01.png" id="7_4nbnq"]
-[ext_resource type="Shader" uid="uid://b1hg6btlggl78" path="res://TRASH/uhhhhh.gdshader" id="7_kt4n2"]
-[ext_resource type="PackedScene" uid="uid://s7e7l3au1xci" path="res://Player/Ball/ball.tscn" id="11_4nbnq"]
-[ext_resource type="PackedScene" uid="uid://7l5yih8w56c3" path="res://Player/Scenes/PlayerCamera.tscn" id="11_hq17w"]
-[ext_resource type="PackedScene" uid="uid://eueafrminvea" path="res://Player/CursorPlayer.tscn" id="14_xmu7k"]
+[ext_resource type="Script" uid="uid://d2a8mp3dff421" path="res://Game/TUTORIAL.gd" id="1_42tek"]
+[ext_resource type="Environment" uid="uid://cadv2uehcxqkc" path="res://MaterialTextures/NewGame.tres" id="2_42tek"]
+[ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="3_jwi4y"]
+[ext_resource type="AudioStream" uid="uid://0m3dhcmgbv7r" path="res://Sounds/ballGoesInHole.wav" id="3_miesf"]
+[ext_resource type="Shader" uid="uid://dvak82lgkrk1o" path="res://Shaders/scrollingTexture.gdshader" id="4_miesf"]
+[ext_resource type="AudioStream" uid="uid://dyk7okuir48ge" path="res://Sounds/Goal.wav" id="4_y86uo"]
+[ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="5_y86uo"]
+[ext_resource type="PackedScene" uid="uid://gj8ykdhfcr2h" path="res://ui/tut_ui.tscn" id="6_qxow3"]
+[ext_resource type="Material" uid="uid://dcuvjs33ebpe3" path="res://MaterialTextures/Room.tres" id="7_nwc01"]
+[ext_resource type="Texture2D" uid="uid://cw62ygditxxqv" path="res://addons/kenney_prototype_textures/light/texture_01.png" id="8_wcc43"]
+[ext_resource type="PackedScene" uid="uid://brejidgy2nq2j" path="res://ui/Pausing.tscn" id="9_cxwsk"]
+[ext_resource type="Shader" uid="uid://b1hg6btlggl78" path="res://TRASH/uhhhhh.gdshader" id="10_d7shm"]
+[ext_resource type="PackedScene" uid="uid://7l5yih8w56c3" path="res://Player/Scenes/PlayerCamera.tscn" id="11_ia5fk"]
+[ext_resource type="PackedScene" uid="uid://s7e7l3au1xci" path="res://Player/Ball/ball.tscn" id="12_1pr1q"]
+[ext_resource type="PackedScene" uid="uid://eueafrminvea" path="res://Player/CursorPlayer.tscn" id="13_5t6b0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ov31c"]
-shader = ExtResource("2_nbohg")
+shader = ExtResource("3_jwi4y")
 shader_parameter/change_color_depth = true
 shader_parameter/target_color_depth = 4
 shader_parameter/dithering = true
@@ -24,7 +26,7 @@ shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8mhp7"]
-shader = ExtResource("3_4nbnq")
+shader = ExtResource("4_miesf")
 shader_parameter/direction = Vector2(1, 0)
 shader_parameter/speed = 0.5
 
@@ -38,6 +40,20 @@ colors = PackedColorArray(1, 1, 1, 0.2)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8mhp7"]
 gradient = SubResource("Gradient_xmu7k")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_42tek"]
+height = 0.252441
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jwi4y"]
+height = 0.769287
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwi4y"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.87, 0.4205, 0, 0.290196)
+uv1_scale = Vector3(0.805, 0.805, 0.805)
+uv1_offset = Vector3(0, -0.84, 0)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mhp7"]
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 8.67
@@ -47,22 +63,34 @@ diffuse_mode = 3
 specular_mode = 1
 disable_ambient_light = true
 albedo_color = Color(0.376057, 0.392551, 0, 1)
-albedo_texture = ExtResource("7_4nbnq")
+albedo_texture = ExtResource("8_wcc43")
 uv1_scale = Vector3(-9.42, -9.42, -9.42)
 uv1_triplanar_sharpness = 0.233259
 texture_filter = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_md3uv"]
-shader = ExtResource("7_kt4n2")
+shader = ExtResource("10_d7shm")
 shader_parameter/speedScale = 50.875
 shader_parameter/clipPosition = 0.2
 
-[node name="TRAINING" type="Node3D"]
+[node name="TUTORIAL" type="Node3D" node_paths=PackedStringArray("fade_overlay", "holeSuctionArea", "GoalArea", "GoalSound1", "GoalSound2")]
+script = ExtResource("1_42tek")
+fade_overlay = NodePath("SceneTransition/FadeTransition")
+holeSuctionArea = NodePath("Preview/SubViewportContainer/SubViewport/HoleSuction")
+GoalArea = NodePath("Preview/SubViewportContainer/SubViewport/Goal")
+GoalSound1 = NodePath("GoalSound1")
+GoalSound2 = NodePath("GoalSound2")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_6d680")
-volume_db = -12.733
+[node name="TUTBGM" type="AudioStreamPlayer" parent="."]
+volume_db = 8.416
 autoplay = true
+
+[node name="GoalSound1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_miesf")
+
+[node name="GoalSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y86uo")
+volume_db = -17.433
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.50051, 0)
@@ -88,14 +116,29 @@ directional_shadow_pancake_size = 0.0
 sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_c0qo6")
+environment = ExtResource("2_42tek")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(-1, -5.2108e-15, 8.74228e-08, 8.74228e-08, -1.47027e-07, 1, 7.64274e-15, 1, 1.47027e-07, -0.193372, 1.01672, 6.24991)
+transform = Transform3D(-1, -8.76349e-15, 8.74228e-08, 6.22794e-08, 0.70178, 0.712394, -6.13516e-08, 0.712394, -0.70178, -0.0220762, 1.01672, 5.69506)
+visible = false
 light_energy = 16.0
 spot_range = 2.95623
 spot_attenuation = 10.0
-spot_angle = 9.7392
+spot_angle = 24.1998
+
+[node name="CursorRoot" parent="." instance=ExtResource("13_5t6b0")]
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="FadeTransition" type="ColorRect" parent="SceneTransition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.192157, 0.184314, 0.203922, 1)
 
 [node name="Preview" type="Control" parent="."]
 layout_mode = 3
@@ -139,9 +182,9 @@ color = Color(0.10864, 0.892513, 1, 1)
 layout_mode = 2
 texture = SubResource("GradientTexture1D_8mhp7")
 
-[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("4_rsb4y")]
+[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("5_y86uo")]
 
-[node name="Node2D" parent="Preview/SubViewportContainer" instance=ExtResource("6_8mhp7")]
+[node name="Node2D" parent="Preview/SubViewportContainer" instance=ExtResource("6_qxow3")]
 
 [node name="SubViewport" type="SubViewport" parent="Preview/SubViewportContainer"]
 handle_input_locally = false
@@ -150,9 +193,31 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(1024, 768)
 render_target_update_mode = 4
 
+[node name="HoleSuction" type="Area3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60782, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/HoleSuction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0184104, -0.788697, 6.24236)
+shape = SubResource("CylinderShape3D_42tek")
+debug_color = Color(0.88, 0.352, 0, 1)
+
+[node name="Goal" type="Area3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60782, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Goal"]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -0.0184104, -1.33206, 6.24236)
+shape = SubResource("CylinderShape3D_jwi4y")
+debug_color = Color(1.73271e-06, 0.62671, 0.564556, 1)
+
+[node name="Hole2" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Goal"]
+transform = Transform3D(0.821, -1.01033e-08, 0, 9.23389e-10, 8.983, 0, 0, 0, 0.809, -0.0108511, -0.450513, 6.23592)
+material_override = SubResource("StandardMaterial3D_jwi4y")
+operation = 2
+height = 0.751472
+
 [node name="Floor" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
 transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55995e-06, 0, 0, 0, 44.9384, -12.3233, 1.15208, 10)
-material_overlay = ExtResource("1_ewgn2")
+material_overlay = ExtResource("7_nwc01")
 operation = 1
 use_collision = true
 collision_layer = 3
@@ -164,7 +229,7 @@ material_override = SubResource("StandardMaterial3D_8mhp7")
 size = Vector3(5.00703, 0.109828, 0.0351485)
 
 [node name="Hole" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
-transform = Transform3D(-4.29233e-08, 3.309, 0, -0.022, -6.45606e-06, 0, 0, 0, 0.017, -0.729891, -0.345004, -0.0837608)
+transform = Transform3D(-4.87765e-08, 3.834, 0, -0.025, -7.48036e-06, 0, 0, 0, 0.02, -0.729891, -0.345004, -0.0837608)
 operation = 2
 height = 0.326187
 
@@ -192,7 +257,7 @@ size = Vector3(0.364502, 1, 7.50741)
 transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252652, -0.328349, -0.35737)
 size = Vector3(0.364502, 1, 7.52892)
 
-[node name="Pausing" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("4_x187o")]
+[node name="Pausing" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("9_cxwsk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3233, 0, 0)
 
 [node name="ColorRect" type="ColorRect" parent="Preview/SubViewportContainer/SubViewport"]
@@ -207,16 +272,18 @@ mouse_filter = 1
 mouse_force_pass_scroll_events = false
 color = Color(0, 0, 0, 1)
 
-[node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_hq17w")]
+[node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_ia5fk")]
 transform = Transform3D(-0.809017, -0.320131, 0.492958, 0, 0.838671, 0.544639, -0.587785, 0.440622, -0.678499, 4.844, 9.6, -9.149)
 target = NodePath("../Ball/CT1")
-speed = 2.0
+speed = 5.0
 
-[node name="Ball" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_4nbnq")]
+[node name="Ball" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("12_1pr1q")]
 transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -0.0111901, 0.928135, -3.01789)
 
 [node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport/Ball"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 3.63763, 10.9495, 0.847166)
 gizmo_extents = 4.42
 
-[node name="CursorRoot" parent="." instance=ExtResource("14_xmu7k")]
+[connection signal="area_entered" from="Preview/SubViewportContainer/SubViewport/HoleSuction" to="." method="_on_hole_suction_area_entered"]
+[connection signal="area_exited" from="Preview/SubViewportContainer/SubViewport/HoleSuction" to="." method="_on_hole_suction_area_exited"]
+[connection signal="area_entered" from="Preview/SubViewportContainer/SubViewport/Goal" to="." method="_on_goal_area_entered"]
