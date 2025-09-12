@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3c8qi8uxo4yt"]
+[gd_scene load_steps=17 format=3 uid="uid://c3c8qi8uxo4yt"]
 
 [ext_resource type="Script" uid="uid://dk00v6dew7sbk" path="res://ui/mainmenu.gd" id="1_keq1y"]
 [ext_resource type="Texture2D" uid="uid://dke0dg1ukuwhj" path="res://ui/TrickPuttUI.png" id="1_yx3mo"]
 [ext_resource type="PackedScene" uid="uid://dh3mtpi2x4067" path="res://ui/World1Levels.tscn" id="2_keq1y"]
 [ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_t31ic"]
 [ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="3_keq1y"]
+[ext_resource type="PackedScene" uid="uid://eueafrminvea" path="res://Player/CursorPlayer.tscn" id="3_t31ic"]
 [ext_resource type="PackedScene" uid="uid://c24khsjnfv1r0" path="res://ui/WORLD_SELECTOR.tscn" id="5_6t2ki"]
 [ext_resource type="PackedScene" uid="uid://phbvdv0qhtg7" path="res://ui/worldsOverlay.tscn" id="5_d87oo"]
 [ext_resource type="Shader" uid="uid://dg0o1j78d3etb" path="res://Shaders/TestingShaders3.gdshader" id="6_4nfc5"]
@@ -73,6 +74,8 @@ gizmo_extents = 4.95
 [node name="WorldsEndMark" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 gizmo_extents = 5.39
+
+[node name="CursorRoot" parent="." instance=ExtResource("3_t31ic")]
 
 [node name="SceneTransition" type="CanvasLayer" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dh3mtpi2x4067"]
+[gd_scene load_steps=15 format=3 uid="uid://dh3mtpi2x4067"]
 
 [ext_resource type="Script" uid="uid://r0sg4cc2ec3t" path="res://ui/world_1_levels.gd" id="1_buwff"]
 [ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_8u4il"]
+[ext_resource type="PackedScene" uid="uid://eueafrminvea" path="res://Player/CursorPlayer.tscn" id="2_buwff"]
 [ext_resource type="Texture2D" uid="uid://bfnab31ns8f7g" path="res://My Textures/tutorialLevel_TV.png" id="3_sehnj"]
 [ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="4_61css"]
 [ext_resource type="PackedScene" uid="uid://uwgpswcjlqob" path="res://ui/WORLD1_EDITOR.tscn" id="5_lj5b6"]
@@ -40,6 +41,8 @@ script = ExtResource("1_buwff")
 fade_overlay = NodePath("SceneTransition/FadeTransition")
 levelSelector = NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/LevelSelect")
 level_markers = [NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv1"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv2"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv3"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv4"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv5")]
+
+[node name="CursorRoot" parent="." instance=ExtResource("2_buwff")]
 
 [node name="worldSelectScroll" type="AudioStreamPlayer" parent="."]
 

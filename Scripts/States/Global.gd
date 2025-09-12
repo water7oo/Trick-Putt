@@ -8,7 +8,7 @@ extends Node
 
 var global_data = GlobalResource.new()
 @export var CUSTOM_GRAVITY: float = 35.0
-var camera = preload("res://Player/Scenes/PlayerCamera.tscn").instantiate()
+var camera = preload("res://Player/PlayerCamera.tscn").instantiate()
 var spring_arm_pivot = camera.get_node("SpringArmPivot")
 var spring_arm = camera.get_node("SpringArmPivot/SpringArm3D")
 

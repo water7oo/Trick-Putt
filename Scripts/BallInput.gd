@@ -5,6 +5,7 @@ extends Node
 @export var drag_power_scale := 0.05
 @export var max_drag_length := 300.0
 @export var respawnPoint = Marker3D
+@export var golfShotPreviewLength := 20
 
 @export var pong: MultiMeshInstance3D
 @export var golf_line: MultiMeshInstance3D
@@ -90,7 +91,7 @@ func _process(delta):
 		golf_line.visible = true
 		var mm = golf_line.multimesh
 		if mm:
-			var steps = 20
+			var steps = golfShotPreviewLength
 			mm.instance_count = steps
 
 			var start = ball_node.BallMesh.global_transform.origin
@@ -127,6 +128,10 @@ func _physics_process(delta):
 	respawn_Player()
 
 func respawn_Player():
+	
+	
+	 #&& get_tree().get_current_scene().get_name() == "DEBUG_Level"
+
 	if Input.is_action_just_pressed("Respawn"):
 		var ball_node = get_node(ball)
 		print("Respawn")
@@ -136,3 +141,5 @@ func respawn_Player():
 			# Reset velocity so it doesn't keep moving
 			ball_node.linear_velocity = Vector3.ZERO
 			ball_node.angular_velocity = Vector3.ZERO
+	else:
+		return

@@ -18,7 +18,7 @@ extends RigidBody3D
 
 # --- Mode ---
 enum PlayMode { GOLF, CUPPONG }
-var current_mode: PlayMode = PlayMode.CUPPONG
+var current_mode: PlayMode = PlayMode.GOLF
 
 # --- Arc Settings ---
 @export var BASE_VERTICAL_ARC: float = 0.3
