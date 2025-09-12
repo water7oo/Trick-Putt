@@ -11,6 +11,10 @@ extends Node3D
 @onready var camera = $SpringArmPivot/SpringArm3D/Margin/Camera3D
 var cam_lerp_speed: float = .005
 
+@export var y_offset: float = 2.0
+@export var x_offset: float = 2.0
+@export var z_offset: float = 2.0
+
 var is_mouse_visible: bool = true
 
 @export var period: float = .04
@@ -19,40 +23,46 @@ var is_mouse_visible: bool = true
 var y_cam_rot_dist: float = 0
 var x_cam_rot_dist: float = 0
 
-var original_global_transform: Transform3D
 var target_node: Node3D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	target_node = get_node(target) as Node3D
-	
-	#original_global_transform = target_node.global_transform
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit_game"):
 		print("Quit Game")
 		get_tree().quit()
-		
 
 func _physics_process(delta):
 	followTarget(delta)
 
 func _process(delta: float) -> void:
-	_unhandled_input(delta)
 	playShake()
 	if Input.is_action_just_pressed("shake_test"):
-		applyShake(.04,0.08)
-		
-	
-	
+		applyShake(.04, 0.08)
+
 func followTarget(delta):
 	if not enabled or not target_node:
 		return
 
-	var new_global_transform = global_transform.interpolate_with(target_node.global_transform, speed * delta)
-	global_transform.origin = new_global_transform.origin
-	
+	# Get current and target positions
+	var current_pos = global_transform.origin
+	var target_pos = target_node.global_transform.origin
+
+	# Apply offsets
+	#target_pos.y += y_offset
+	#target_pos.x += x_offset
+	#target_pos.z += z_offset
+
+	# Smoothly interpolate position
+	var new_pos = current_pos.lerp(target_pos, speed * delta)
+
+	# Update ONLY the position, keep this node's own rotation stable
+	global_transform.origin = new_pos
+	# Force rotation back to neutral (so no spinning with ball)
+	global_transform.basis = Basis.IDENTITY
 
 func applyShake(period, magnitude):
 	var initial_transform = self.transform
@@ -73,8 +83,6 @@ func applyShake(period, magnitude):
 
 func playShake():
 	if EnemyHealthManager.taking_damage == true:
-		applyShake(.02,0.08)
-		pass
+		applyShake(.02, 0.08)
 	if PlayerHealthManager.taking_damage == true:
-		applyShake(.02,0.08)
-		pass
+		applyShake(.02, 0.08)

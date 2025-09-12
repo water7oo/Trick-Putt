@@ -1,13 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://eueafrminvea"]
 
 [ext_resource type="Script" uid="uid://dd6pvapbn20c6" path="res://Player/cursor_player.gd" id="1_62uh5"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_62uh5"]
-texture_filter = 1
+[ext_resource type="Texture2D" uid="uid://bxc0blgeb0rhu" path="res://My Textures/cursoer.png" id="2_x77v6"]
 
 [node name="CursorRoot" type="CanvasLayer"]
 script = ExtResource("1_62uh5")
 
 [node name="Cursor" type="Sprite2D" parent="."]
-scale = Vector2(38.285, 38.285)
-texture = SubResource("CanvasTexture_62uh5")
+scale = Vector2(0.29, 0.29)
+texture = ExtResource("2_x77v6")

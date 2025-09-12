@@ -10,7 +10,7 @@
 render_priority = 0
 shader = ExtResource("2_h5wb0")
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
-shader_parameter/sensitivity = 800.0
+shader_parameter/sensitivity = 3000.0
 shader_parameter/thickness = 2.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_n1m7q"]
@@ -42,10 +42,8 @@ _data = {
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ch53u"]
 
-[node name="CameraSet" type="Node3D" node_paths=PackedStringArray("spring_arm_pivot") groups=["camera"]]
+[node name="CameraSet" type="Node3D" groups=["camera"]]
 script = ExtResource("1_ch53u")
-enabled = true
-spring_arm_pivot = NodePath("SpringArmPivot")
 
 [node name="SpringArmPivot" type="Node3D" parent="." groups=["camera"]]
 
@@ -82,6 +80,7 @@ visible = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="SpringArmPivot"]
 transform = Transform3D(0.445, 0, 0, 0, 0.444999, 0, 0, 0, 0.445, 0, -5.74527, 0.232)
+visible = false
 material_override = SubResource("ShaderMaterial_wivcw")
 transparency = 0.85
 mesh = SubResource("CapsuleMesh_a8st2")

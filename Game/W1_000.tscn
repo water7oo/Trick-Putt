@@ -31,14 +31,13 @@ shader_parameter/direction = Vector2(1, 0)
 shader_parameter/speed = 0.5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6d680"]
-load_path = "res://.godot/imported/Illustration.png-fa5d480dcb9fe5557cc8a5ad4b3eabda.s3tc.ctex"
 
-[sub_resource type="Gradient" id="Gradient_xmu7k"]
+[sub_resource type="Gradient" id="Gradient_jwi4y"]
 offsets = PackedFloat32Array(0.78344)
 colors = PackedColorArray(1, 1, 1, 0.2)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8mhp7"]
-gradient = SubResource("Gradient_xmu7k")
+gradient = SubResource("Gradient_jwi4y")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_42tek"]
 height = 0.252441
@@ -73,9 +72,10 @@ shader = ExtResource("10_d7shm")
 shader_parameter/speedScale = 50.875
 shader_parameter/clipPosition = 0.2
 
-[node name="TUTORIAL" type="Node3D" node_paths=PackedStringArray("fade_overlay", "holeSuctionArea", "GoalArea", "GoalSound1", "GoalSound2")]
+[node name="TUTORIAL" type="Node3D" node_paths=PackedStringArray("fade_overlay", "playerBall", "holeSuctionArea", "GoalArea", "GoalSound1", "GoalSound2")]
 script = ExtResource("1_42tek")
 fade_overlay = NodePath("SceneTransition/FadeTransition")
+playerBall = NodePath("Preview/SubViewportContainer/SubViewport/Ball")
 holeSuctionArea = NodePath("Preview/SubViewportContainer/SubViewport/HoleSuction")
 GoalArea = NodePath("Preview/SubViewportContainer/SubViewport/Goal")
 GoalSound1 = NodePath("GoalSound1")
@@ -194,10 +194,10 @@ size = Vector2i(1024, 768)
 render_target_update_mode = 4
 
 [node name="HoleSuction" type="Area3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60782, 0)
+transform = Transform3D(0.165, 0, 0, 0, 0.165, 0, 0, 0, 0.165, 0, 1, 6.21699)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/HoleSuction"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0184104, -0.788697, 6.24236)
+transform = Transform3D(7.83, 0, 0, 0, 7.83, 0, 0, 0, 7.83, 0, 0, 0)
 shape = SubResource("CylinderShape3D_42tek")
 debug_color = Color(0.88, 0.352, 0, 1)
 
@@ -211,6 +211,7 @@ debug_color = Color(1.73271e-06, 0.62671, 0.564556, 1)
 
 [node name="Hole2" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Goal"]
 transform = Transform3D(0.821, -1.01033e-08, 0, 9.23389e-10, 8.983, 0, 0, 0, 0.809, -0.0108511, -0.450513, 6.23592)
+visible = false
 material_override = SubResource("StandardMaterial3D_jwi4y")
 operation = 2
 height = 0.751472
@@ -242,16 +243,16 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="wall" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
-transform = Transform3D(-5.61142e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.252652, -0.249506, -0.207892)
-size = Vector3(0.364502, 1, 14.0921)
+transform = Transform3D(-5.61145e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, 1.93376, -0.249506, -0.207892)
+size = Vector3(0.364502, 2.07605, 14.0921)
 
 [node name="wall2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
-transform = Transform3D(-5.61142e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.252652, -0.430783, -0.207995)
-size = Vector3(0.364502, 1, 14.0828)
+transform = Transform3D(-5.61153e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, -0.00350207, -0.430783, -0.207995)
+size = Vector3(0.364502, 1.12262, 14.0828)
 
 [node name="wall3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
-transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252653, -0.334559, -0.0527423)
-size = Vector3(0.364502, 1, 7.50741)
+transform = Transform3D(0, 4.06378, -5.61144e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, 1.87027, -0.334559, -0.0527423)
+size = Vector3(0.364502, 2.0448, 7.50741)
 
 [node name="wall4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
 transform = Transform3D(0, 4.06378, -5.61142e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, -0.252652, -0.328349, -0.35737)
@@ -274,15 +275,15 @@ color = Color(0, 0, 0, 1)
 
 [node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_ia5fk")]
 transform = Transform3D(-0.809017, -0.320131, 0.492958, 0, 0.838671, 0.544639, -0.587785, 0.440622, -0.678499, 4.844, 9.6, -9.149)
-target = NodePath("../Ball/CT1")
+target = NodePath("../CT1")
 speed = 5.0
+
+[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.328, 0, 0, 0, 0.328, 0, 0, 0, 0.328, 1.48024, 5.41743, -2.67055)
+gizmo_extents = 4.42
 
 [node name="Ball" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("12_1pr1q")]
 transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -0.0111901, 0.928135, -3.01789)
-
-[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport/Ball"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 3.63763, 10.9495, 0.847166)
-gizmo_extents = 4.42
 
 [connection signal="area_entered" from="Preview/SubViewportContainer/SubViewport/HoleSuction" to="." method="_on_hole_suction_area_entered"]
 [connection signal="area_exited" from="Preview/SubViewportContainer/SubViewport/HoleSuction" to="." method="_on_hole_suction_area_exited"]

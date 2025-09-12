@@ -1,0 +1,387 @@
+[gd_scene load_steps=34 format=3 uid="uid://bcjv5dx0ys3ed"]
+
+[ext_resource type="AudioStream" uid="uid://0m3dhcmgbv7r" path="res://Sounds/ballGoesInHole.wav" id="1_e1pvl"]
+[ext_resource type="AudioStream" uid="uid://dyk7okuir48ge" path="res://Sounds/Goal.wav" id="2_bjmos"]
+[ext_resource type="Environment" uid="uid://cadv2uehcxqkc" path="res://MaterialTextures/NewGame.tres" id="3_buwrb"]
+[ext_resource type="PackedScene" uid="uid://eueafrminvea" path="res://Player/CursorPlayer.tscn" id="4_jbv4l"]
+[ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="5_8ycfb"]
+[ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="7_68c15"]
+[ext_resource type="PackedScene" uid="uid://gj8ykdhfcr2h" path="res://ui/tut_ui.tscn" id="8_f6od5"]
+[ext_resource type="Material" uid="uid://dcuvjs33ebpe3" path="res://MaterialTextures/Room.tres" id="9_6owl5"]
+[ext_resource type="Texture2D" uid="uid://claoohctxdx30" path="res://addons/kenney_prototype_textures/light/texture_11.png" id="9_buwrb"]
+[ext_resource type="Texture2D" uid="uid://cw62ygditxxqv" path="res://addons/kenney_prototype_textures/light/texture_01.png" id="10_ng0fc"]
+[ext_resource type="PackedScene" uid="uid://brejidgy2nq2j" path="res://ui/Pausing.tscn" id="11_4d0og"]
+[ext_resource type="Shader" uid="uid://b1hg6btlggl78" path="res://TRASH/uhhhhh.gdshader" id="12_b458c"]
+[ext_resource type="PackedScene" uid="uid://7l5yih8w56c3" path="res://Player/Scenes/PlayerCamera.tscn" id="13_f6si6"]
+[ext_resource type="PackedScene" uid="uid://s7e7l3au1xci" path="res://Player/Ball/ball.tscn" id="14_3y846"]
+[ext_resource type="Script" uid="uid://dv1kbb33hpwq2" path="res://Scripts/BallInput.gd" id="15_bjmos"]
+[ext_resource type="Script" uid="uid://pfbt3jtg6fxf" path="res://Game/BankPlatformL.gd" id="17_jbv4l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51das"]
+shader = ExtResource("5_8ycfb")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 4
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 2
+shader_parameter/enable_recolor = false
+
+[sub_resource type="Gradient" id="Gradient_xmu7k"]
+offsets = PackedFloat32Array(0.78344)
+colors = PackedColorArray(1, 1, 1, 0.2)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_omn6w"]
+gradient = SubResource("Gradient_xmu7k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0chel"]
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.67
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qlotu"]
+height = 0.252441
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g6d75"]
+height = 0.769287
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njpay"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.87, 0.4205, 0, 0.290196)
+uv1_scale = Vector3(0.805, 0.805, 0.805)
+uv1_offset = Vector3(0, -0.84, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1pvl"]
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+albedo_color = Color(0.39, 0.39, 0.39, 1)
+albedo_texture = ExtResource("10_ng0fc")
+uv1_scale = Vector3(-9.42, -9.42, -9.42)
+uv1_triplanar_sharpness = 0.233259
+texture_filter = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4xccu"]
+shader = ExtResource("12_b458c")
+shader_parameter/speedScale = 50.875
+shader_parameter/clipPosition = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjmos"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ngs66"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_buwrb"]
+transform_format = 1
+instance_count = 15
+mesh = SubResource("SphereMesh_ngs66")
+buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.3893e+34, 8.07148e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 0, 0, 0, 0, 9.18355e-41, 0, 0, -1.86784, 0, 0, 0, 0, 0, 0, 0, -6.0536e-09, -1.86728, 0, 0, 0, 0, 0, 0, 0, -2.12511e+38, 0, 0, 0, 0, 0, 0, 0, 52228.4, 7.20267e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9.2984e-40, 3.08286e-44, 1.53221e-30, 8.07148e-43, 1.26117e-44, 1.4013e-45, 0, 0, 1.12104e-44, 0, 0, 0, 0, 0, 0, 0, 0, 0, nan, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 1.53221e-30, 8.07148e-43, 2.69049e-43, 5.60519e-44, 4.62428e-44, 1.4013e-45, 2.8026e-45, 0, 5.60519e-44, 4.62428e-44, 1.4013e-45, 0, 2.8026e-45, 0, 1.4013e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.60519e-45, 0, 8.40779e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.96182e-44, 0, 0, 0, 0, 0)
+
+[sub_resource type="PrismMesh" id="PrismMesh_bjmos"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_jbv4l"]
+transform_format = 1
+instance_count = 15
+mesh = SubResource("PrismMesh_bjmos")
+buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.3893e+34, 8.07148e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 0, 0, 0, 0, 9.18355e-41, 0, 0, -1.86784, 0, 0, 0, 0, 0, 0, 0, -6.0536e-09, -1.86728, 0, 0, 0, 0, 0, 0, 0, -2.12511e+38, 0, 0, 0, 0, 0, 0, 0, 52228.4, 7.20267e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9.2984e-40, 3.08286e-44, 1.53221e-30, 8.07148e-43, 1.26117e-44, 1.4013e-45, 0, 0, 1.12104e-44, 0, 0, 0, 0, 0, 0, 0, 0, 0, nan, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 1.53221e-30, 8.07148e-43, 2.69049e-43, 5.60519e-44, 4.62428e-44, 1.4013e-45, 2.8026e-45, 0, 5.60519e-44, 4.62428e-44, 1.4013e-45, 0, 2.8026e-45, 0, 1.4013e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.60519e-45, 0, 8.40779e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.96182e-44, 0, 0, 0, 0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_buwrb"]
+size = Vector3(1, 0.0996704, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbv4l"]
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+albedo_color = Color(0.873298, 0.873298, 0.873298, 1)
+albedo_texture = ExtResource("9_buwrb")
+uv1_scale = Vector3(-2, -2, -2)
+uv1_triplanar_sharpness = 0.233259
+texture_filter = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ycfb"]
+
+[node name="DEBUG" type="Node3D"]
+
+[node name="TUTBGM" type="AudioStreamPlayer" parent="."]
+volume_db = 8.416
+autoplay = true
+
+[node name="GoalSound1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_e1pvl")
+
+[node name="GoalSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bjmos")
+volume_db = -17.433
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.50051, 0)
+light_energy = 1.329
+shadow_enabled = true
+shadow_normal_bias = 3.564
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.183
+directional_shadow_fade_start = 0.0
+directional_shadow_pancake_size = 0.0
+sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0505383, -0.992546, -0.110896, 0.909961, 3.97757e-08, -0.414693, 0.411602, -0.121869, 0.903179, 0, 9.50051, 0)
+light_energy = 1.329
+shadow_enabled = true
+shadow_normal_bias = 3.564
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.183
+directional_shadow_fade_start = 0.0
+directional_shadow_pancake_size = 0.0
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_buwrb")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, -7.6265e-14, 8.74228e-08, 6.22794e-08, 0.70178, 0.712394, -6.13516e-08, 0.712394, -0.70178, -0.0220762, 9.80274, 5.69506)
+light_energy = 16.0
+spot_range = 2.95623
+spot_attenuation = 10.0
+spot_angle = 24.1998
+
+[node name="CursorRoot" parent="." instance=ExtResource("4_jbv4l")]
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="FadeTransition" type="ColorRect" parent="SceneTransition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.192157, 0.184314, 0.203922, 1)
+
+[node name="Preview" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Preview"]
+material = SubResource("ShaderMaterial_51das")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Preview/SubViewportContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_omn6w")
+
+[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("7_68c15")]
+
+[node name="Node2D" parent="Preview/SubViewportContainer" instance=ExtResource("8_f6od5")]
+
+[node name="SubViewport" type="SubViewport" parent="Preview/SubViewportContainer"]
+handle_input_locally = false
+scaling_3d_mode = 0
+canvas_item_default_texture_filter = 0
+size = Vector2i(1024, 768)
+render_target_update_mode = 4
+
+[node name="Floor" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55996e-06, 0, 0, 0, 44.9384, -12.3233, 1.15208, 10)
+material_overlay = ExtResource("9_6owl5")
+operation = 1
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="Floor" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(11.342, -6.82121e-13, 0, 1.77636e-15, 1.633, 0, 0, 0, 8.724, -28.904, -0.351222, -0.295048)
+material_override = SubResource("StandardMaterial3D_0chel")
+size = Vector3(5.00703, 0.737174, 0.132078)
+
+[node name="Hole" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-4.87765e-08, 3.834, 0, -0.025, -7.48036e-06, 0, 0, 0, 0.02, -0.729891, -0.345004, -0.0837608)
+operation = 2
+height = 0.326187
+
+[node name="HoleSuction" type="Area3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole"]
+transform = Transform3D(0.184938, -1.65228e-05, 0, -6.21378e-11, 0.0552475, 0, 0, 0, 0.183585, 0.0121781, 0.139452, -0.0210662)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole/HoleSuction"]
+transform = Transform3D(7.83, 0, 0, 0, 7.83, 0, 0, 0, 7.83, 0, 0, 0)
+shape = SubResource("CylinderShape3D_qlotu")
+debug_color = Color(0.88, 0.352, 0, 1)
+
+[node name="Goal" type="Area3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole"]
+transform = Transform3D(1.12083, -0.000100138, 0, -3.76593e-10, 0.334833, 0, 0, 0, 1.11263, 0.0121172, 0.34297, -6.9383)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole/Goal"]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -0.0184104, -1.33206, 6.24236)
+shape = SubResource("CylinderShape3D_g6d75")
+debug_color = Color(1.73271e-06, 0.62671, 0.564556, 1)
+
+[node name="Hole2" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole/Goal"]
+transform = Transform3D(0.821, -1.01033e-08, 0, 9.23389e-10, 8.983, 0, 0, 0, 0.809, -0.0108511, -0.450513, 6.23592)
+visible = false
+material_override = SubResource("StandardMaterial3D_njpay")
+operation = 2
+height = 0.751472
+
+[node name="Hole2" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(-4.87765e-08, 3.834, 0, -0.025, -7.48036e-06, 0, 0, 0, 0.02, -0.729891, -0.232921, -0.0837608)
+operation = 2
+height = 0.326187
+
+[node name="HoleSuction" type="Area3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole2"]
+transform = Transform3D(0.184938, -1.65228e-05, 0, -6.21378e-11, 0.0552475, 0, 0, 0, 0.183585, 0.0121781, 0.139452, -0.0210662)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole2/HoleSuction"]
+transform = Transform3D(7.83, 0, 0, 0, 7.83, 0, 0, 0, 7.83, 0, 0, 0)
+shape = SubResource("CylinderShape3D_qlotu")
+debug_color = Color(0.88, 0.352, 0, 1)
+
+[node name="Goal" type="Area3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole2"]
+transform = Transform3D(1.12083, -0.000100138, 0, -3.76593e-10, 0.334833, 0, 0, 0, 1.11263, 0.0121172, 0.34297, -6.9383)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole2/Goal"]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -0.0184104, -1.33206, 6.24236)
+shape = SubResource("CylinderShape3D_g6d75")
+debug_color = Color(1.73271e-06, 0.62671, 0.564556, 1)
+
+[node name="Hole2" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor/Hole2/Goal"]
+transform = Transform3D(0.821, -1.01033e-08, 0, 9.23389e-10, 8.983, 0, 0, 0, 0.809, -0.0108511, -0.450513, 6.23592)
+visible = false
+material_override = SubResource("StandardMaterial3D_njpay")
+operation = 2
+height = 0.751472
+
+[node name="walls" type="CSGCombiner3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(-3.40497e-08, -35.6877, 0, 0.778967, -1.55996e-06, 0, 0, 0, 44.9384, -12.323, -0.137, 10)
+material_overlay = SubResource("StandardMaterial3D_e1pvl")
+operation = 1
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="wall" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(-5.6115e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, 1.93376, 0.142786, -0.297927)
+size = Vector3(0.364502, 2.07605, 52)
+
+[node name="wall2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(-5.61168e-08, 4.06378, 0, -0.0280209, -3.87726e-09, 0, 0, 0, 0.0222527, 8.651, -0.952704, -0.297927)
+size = Vector3(3.61682, 5.38196, 52)
+
+[node name="wall3" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(0, 4.06378, -5.61151e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, 1.87027, -0.355471, 0.0585213)
+size = Vector3(0.364502, 2.0448, 43)
+
+[node name="wall4" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/walls"]
+transform = Transform3D(0, 4.06378, -5.6115e-08, 0, -3.87726e-09, -0.0280209, -0.0222527, 0, 0, 1.77924, -0.36297, -0.535391)
+size = Vector3(0.364502, 2, 44)
+
+[node name="Pausing" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("11_4d0og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3233, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preview/SubViewportContainer/SubViewport"]
+visible = false
+material = SubResource("ShaderMaterial_4xccu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+color = Color(0, 0, 0, 1)
+
+[node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("13_f6si6")]
+transform = Transform3D(0.00872656, 0.601792, -0.798605, 0, 0.798636, 0.601815, 0.999961, -0.00525178, 0.00696934, -21.281, 16.79, -1.17)
+target = NodePath("../Ball/CT1")
+speed = 5.0
+
+[node name="Respawn" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.41, 0, 0, 0, -1.79217e-08, -0.41, 0, 0.41, -1.79217e-08, 0, 1, -3)
+gizmo_extents = 4.42
+
+[node name="Input" type="Node" parent="Preview/SubViewportContainer/SubViewport" node_paths=PackedStringArray("respawnPoint", "pong", "golf_line")]
+script = ExtResource("15_bjmos")
+ball = NodePath("../Ball")
+camera_scene = NodePath("../CameraSet")
+respawnPoint = NodePath("../Respawn")
+pong = NodePath("PongLine")
+golf_line = NodePath("GolfLine")
+
+[node name="PongLine" type="MultiMeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Input"]
+transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-09, 0, -3.72529e-09, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_bjmos")
+multimesh = SubResource("MultiMesh_buwrb")
+
+[node name="GolfLine" type="MultiMeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Input"]
+transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-09, 0, -3.72529e-09, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_bjmos")
+multimesh = SubResource("MultiMesh_jbv4l")
+
+[node name="Ball" parent="Preview/SubViewportContainer/SubViewport" node_paths=PackedStringArray("parabola_mesh", "golf_line_mesh") instance=ExtResource("14_3y846")]
+transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 1, -3)
+gravity_scale = 2.0
+parabola_mesh = NodePath("../Input/PongLine")
+golf_line_mesh = NodePath("../Input/GolfLine")
+golfPower = 0.1
+pongPower = 0.16
+
+[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport/Ball"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -43.9024, 21.9512, -2.43902)
+gizmo_extents = 4.42
+
+[node name="Bank1" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 3, -12)
+script = ExtResource("17_jbv4l")
+bank_power = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank1" groups=["BankPlatform"]]
+transform = Transform3D(42, 0, 0, 0, 1.635, 0, 0, 0, 9.175, 0, 0.0903935, 4.76837e-07)
+shape = SubResource("BoxShape3D_buwrb")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank1"]
+transform = Transform3D(42, 0, 0, 0, 0.23, 0, 0, 0, 9.175, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jbv4l")
+mesh = SubResource("BoxMesh_8ycfb")
+
+[node name="Bank3" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(-6.55671e-08, -0.707107, -0.707107, 2.18557e-08, 0.707107, -0.707107, 1, -6.18172e-08, -3.09086e-08, 5, 3, -2)
+script = ExtResource("17_jbv4l")
+bank_power = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank3" groups=["BankPlatform"]]
+transform = Transform3D(5.71, 0, 0, 0, 1.635, 0, 0, 0, 8.845, 0, 0.0903935, 4.76837e-07)
+shape = SubResource("BoxShape3D_buwrb")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank3"]
+transform = Transform3D(5.71, 0, 0, 0, 0.23, 0, 0, 0, 8.845, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jbv4l")
+mesh = SubResource("BoxMesh_8ycfb")
+
+[node name="Bank2" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(-1, -1.0677e-07, -1.0677e-07, 0, 0.707107, -0.707107, 1.50996e-07, -0.707107, -0.707107, 0, 3, 11)
+script = ExtResource("17_jbv4l")
+bank_power = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank2" groups=["BankPlatform"]]
+transform = Transform3D(40, 0, 0, 0, 1.635, 0, 0, 0, 10.9, 0, 0.0903935, 4.76837e-07)
+shape = SubResource("BoxShape3D_buwrb")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank2"]
+transform = Transform3D(40, 0, 0, 0, 0.23, 0, 0, 0, 10.9, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jbv4l")
+mesh = SubResource("BoxMesh_8ycfb")

@@ -1,19 +1,19 @@
-[gd_scene load_steps=22 format=3 uid="uid://s7e7l3au1xci"]
+[gd_scene load_steps=20 format=3 uid="uid://s7e7l3au1xci"]
 
 [ext_resource type="Script" uid="uid://wuovol8q5s4x" path="res://Player/Ball/ball.gd" id="1_x8fbi"]
-[ext_resource type="PackedScene" uid="uid://b1cetjognw8y6" path="res://FX/DustWave2.tscn" id="2_avp1e"]
 [ext_resource type="Gradient" uid="uid://brlyvoi2s3fa2" path="res://Player/Ball/balltrailDefaultSMASH.tres" id="3_il2rs"]
 [ext_resource type="FontFile" uid="uid://cg2l5vxyisqd1" path="res://ui/mario-kart-ds-oultine-font/mario-kart-ds-oultine-font.ttf" id="4_d4s7q"]
 [ext_resource type="Gradient" uid="uid://5vsiwdjoyf02" path="res://Player/Ball/balltrailDefault.tres" id="5_43ivl"]
-[ext_resource type="PackedScene" uid="uid://ugdlxfbar3wk" path="res://FX/hit_1.tscn" id="6_kp8ei"]
 [ext_resource type="Material" uid="uid://bldkvyovb0dws" path="res://Player/Ball/ballMaterialSMASH.tres" id="7_b557h"]
 [ext_resource type="AudioStream" uid="uid://bvxhnl6dkh3ek" path="res://Sounds/footstep_carpet_003.ogg" id="7_kp8ei"]
 [ext_resource type="Material" uid="uid://ldhitxh53ql3" path="res://Player/Ball/ballMaterial.tres" id="8_ngs66"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbx31"]
-bounce = 0.65
+rough = true
+bounce = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbx31"]
+shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1
 
@@ -56,23 +56,17 @@ point_count = 3
 [sub_resource type="SphereShape3D" id="SphereShape3D_avp1e"]
 radius = 0.75369
 
-[node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("trailEmitter")]
+[node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("trailEmitter", "modeDebugLabel")]
 transform = Transform3D(-1.4122e-08, 0.999553, -0.0299096, 4.36906e-08, 0.0299096, 0.999553, 1, 1.28088e-08, -4.40935e-08, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_cbx31")
-gravity_scale = 2.5
+gravity_scale = 1.8
 script = ExtResource("1_x8fbi")
 trailEmitter = NodePath("TrailEmitter")
-ballDefaultTrail = ExtResource("5_43ivl")
-ballDefaultTrailSmash = ExtResource("3_il2rs")
-ballDefaultTrailSmash2 = ExtResource("7_b557h")
-surface_effect_scene = ExtResource("2_avp1e")
-hit1 = ExtResource("6_kp8ei")
-vforce = 0.0
-hforce = 30.0
-force = 20.0
-smashForce = 30.0
-smashSteepness = 0.002
-BASE_VERTICAL_ARC = 0.5
+modeDebugLabel = NodePath("Mode Debug")
+max_drag_length = 100.0
+BASE_VERTICAL_ARC = 1.0
+ARC_STRENGTH_MULTIPLIER = 50.0
+bank_power_multiplier = 1.5
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_cbx31")
@@ -138,16 +132,22 @@ debug_color = Color(0.930823, 0.263165, 0, 0.42)
 [node name="BallSpeed" type="RichTextLabel" parent="."]
 visible = false
 offset_left = 17.0
-offset_top = 723.0
+offset_top = 626.0
 offset_right = 337.0
-offset_bottom = 763.0
+offset_bottom = 666.0
 scale = Vector2(1.68, 1.68)
 theme_override_fonts/normal_font = ExtResource("4_d4s7q")
 text = "BALL SPEED: NULL"
 
-[node name="Dragline" type="CanvasLayer" parent="."]
+[node name="Mode Debug" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 565.0
+offset_right = 441.0
+offset_bottom = 622.0
+theme_override_font_sizes/font_size = 41
+text = "CURRENT MODE: NaN"
 
-[node name="Line2D" type="Line2D" parent="Dragline"]
-width = 6.0
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1.64, 9.33198e-08, -1.77636e-15, 1.77636e-15, -7.07805e-08, -1.64, -9.33198e-08, 1.64, -7.07805e-08, 5.58383e-09, 0.00382256, 0.127747)
 
 [connection signal="area_entered" from="pBall" to="." method="_on_p_ball_area_entered"]
