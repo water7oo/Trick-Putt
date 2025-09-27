@@ -78,6 +78,7 @@ gizmo_extents = 5.39
 [node name="CursorRoot" parent="." instance=ExtResource("3_t31ic")]
 
 [node name="SceneTransition" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="FadeTransition" type="ColorRect" parent="SceneTransition"]
 anchors_preset = 15

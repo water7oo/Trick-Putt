@@ -6,6 +6,7 @@ extends Node3D
 @export var GoalArea: Area3D
 @export var GoalSound1: AudioStreamPlayer
 @export var GoalSound2: AudioStreamPlayer
+@export var ApplauseSound: AudioStreamPlayer
 @export var suctionEpicenter = Node3D
 
 @export var completionMenu = Node2D
@@ -58,6 +59,7 @@ func _on_goal_area_entered(area: Area3D) -> void:
 	if area.name == "pBall":
 		GoalSound1.play()
 		GoalSound2.play()
+		ApplauseSound.play()
 		isCompleteLevel = true
 		completionMenu.visible = true
 		

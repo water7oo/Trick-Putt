@@ -42,8 +42,9 @@ _data = {
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ch53u"]
 
-[node name="CameraSet" type="Node3D" groups=["camera"]]
+[node name="CameraSet" type="Node3D" node_paths=PackedStringArray("spring_arm_pivot") groups=["camera"]]
 script = ExtResource("1_ch53u")
+spring_arm_pivot = NodePath("SpringArmPivot")
 
 [node name="SpringArmPivot" type="Node3D" parent="." groups=["camera"]]
 
@@ -56,10 +57,9 @@ shape = SubResource("BoxShape3D_ch53u")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D/Margin"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 0.988067, -0.154021, 0, 0.154021, 0.988067, 0, -4.41225, 4.94835)
+transform = Transform3D(1, 0, 0, 0, 0.993338, 0.115231, 0, -0.115231, 0.993338, 0, 2.45813, 6.28917)
 current = true
-fov = 68.1
-size = 7.078
+size = 0.08
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpringArmPivot/SpringArm3D/Margin/Camera3D"]
 transform = Transform3D(2, -2.32831e-10, -5.96046e-08, 2.32831e-10, 2, 0, 0, 0, 2, 0.0447144, -0.107597, -1.45398)

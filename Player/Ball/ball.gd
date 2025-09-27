@@ -4,6 +4,7 @@ extends RigidBody3D
 @onready var BallCollision: CollisionShape3D = $BallColllision
 @onready var BallMesh: MeshInstance3D = $BallMesh
 @onready var BallBounce: AudioStreamPlayer = $BallBounce
+@onready var PlatformCombo: AudioStreamPlayer = $PlatformCombo
 @onready var BallHit: AudioStreamPlayer = $HitSound
 @export var trailEmitter: Node
 @export var parabola_mesh: MultiMeshInstance3D  # 3D parabola preview (Cup Pong)
@@ -18,7 +19,7 @@ extends RigidBody3D
 
 # --- Mode ---
 enum PlayMode { GOLF, CUPPONG }
-var current_mode: PlayMode = PlayMode.GOLF
+var current_mode: PlayMode = PlayMode.CUPPONG
 
 # --- Arc Settings ---
 @export var BASE_VERTICAL_ARC: float = 0.3
@@ -29,6 +30,11 @@ var current_mode: PlayMode = PlayMode.GOLF
 @export var golfPower = 0.05
 @export var pongPower = 0.05
 @export var bank_power_multiplier: float = 1.0
+
+var combo_count: int = 0
+@export var combo_pitch_step: float = .2  # how much the pitch rises each combo
+@export var combo_pitch_max: float = 2.0   # max pitch so it doesn’t get too squeaky
+
 
 func _ready():
 	contact_monitor = true
@@ -139,7 +145,7 @@ func _update_3d_parabola(drag_vector: Vector2, cam: Camera3D, mesh: MultiMeshIns
 	var height = min_height + power * 1  # drag longer = taller arc
 
 	# Control point for quadratic Bezier
-	var control = start + (end - start) * 0.5 + Vector3.UP * height
+	var control = start + (end - start) * .5 + Vector3.UP * height
 
 	# Number of steps for parabola preview
 	var steps = 20
@@ -188,46 +194,37 @@ func _update_ground_line(drag_vector: Vector2, cam: Camera3D, mesh: MultiMeshIns
 
 var bounced_platforms: Array = []
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+func _integrate_forces(state):
 	for i in range(state.get_contact_count()):
 		var collider = state.get_contact_collider_object(i)
-		if collider and collider.is_in_group("BankPlatform") and collider not in bounced_platforms:
-			# Convert local normal to world space
+
+		if collider is StaticBody3D and collider.is_in_group("BankPlatform"):
+			PlatformCombo.pitch_scale += .2
+			PlatformCombo.play()
+			combo_count += 1
+
+			print("Combo:", combo_count)
 			var local_normal = state.get_contact_local_normal(i)
-			var world_normal = (global_transform.basis * local_normal).normalized()
+			var world_normal = (collider.global_transform.basis * local_normal).normalized()
 
-
-			# Get platform-specific bounce power
-			var platform_power = 1.0
+			# Grab platform power (custom property)
+			var platform_power: float = 1.0
 			if "bank_power" in collider:
 				platform_power = collider.bank_power
 
-			platform_power *= bank_power_multiplier
+			var blend := -1  # 0 = pure normal, 1 = pure incoming bounce
+			var normal_velocity = world_normal * (maxSpeed * platform_power)
+			var bounced_velocity = linear_velocity.bounce(world_normal).normalized() * (maxSpeed * platform_power)
 
-			# Reflect velocity along platform normal
-			var incoming_velocity = linear_velocity
-			var reflected_velocity = incoming_velocity - 2  * incoming_velocity.dot(world_normal) * world_normal
+			linear_velocity = bounced_velocity.lerp(normal_velocity, blend)
+			
+			print("Banked off:", collider.name, "normal:", world_normal, "power:", platform_power)
+		elif !collider.is_in_group("BankPlatform"):
+			reset_combo()
 
-			# Apply impulse
-			var impulse = reflected_velocity.normalized() * incoming_velocity.length() * platform_power * mass
-			apply_central_impulse(impulse)
-
-			if BallBounce:
-				BallBounce.play()
-
-			bounced_platforms.append(collider)
-
-	# Remove platforms no longer in contact
-	for platform in bounced_platforms.duplicate():
-		var still_in_contact = false
-		for j in range(state.get_contact_count()):
-			if state.get_contact_collider_object(j) == platform:
-				still_in_contact = true
-				break
-		if not still_in_contact:
-			bounced_platforms.erase(platform)
-
-
+func reset_combo():
+	combo_count = 0
+	PlatformCombo.pitch_scale = .5
 
 
 func _on_p_ball_area_entered(area):

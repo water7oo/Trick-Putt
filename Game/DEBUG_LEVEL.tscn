@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bcjv5dx0ys3ed"]
+[gd_scene load_steps=35 format=3 uid="uid://bcjv5dx0ys3ed"]
 
 [ext_resource type="AudioStream" uid="uid://0m3dhcmgbv7r" path="res://Sounds/ballGoesInHole.wav" id="1_e1pvl"]
 [ext_resource type="AudioStream" uid="uid://dyk7okuir48ge" path="res://Sounds/Goal.wav" id="2_bjmos"]
@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="7_68c15"]
 [ext_resource type="PackedScene" uid="uid://gj8ykdhfcr2h" path="res://ui/tut_ui.tscn" id="8_f6od5"]
 [ext_resource type="Material" uid="uid://dcuvjs33ebpe3" path="res://MaterialTextures/Room.tres" id="9_6owl5"]
-[ext_resource type="Texture2D" uid="uid://claoohctxdx30" path="res://addons/kenney_prototype_textures/light/texture_11.png" id="9_buwrb"]
-[ext_resource type="Texture2D" uid="uid://cw62ygditxxqv" path="res://addons/kenney_prototype_textures/light/texture_01.png" id="10_ng0fc"]
+[ext_resource type="Texture2D" uid="uid://dx0vwoe766a8c" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="9_jbv4l"]
 [ext_resource type="PackedScene" uid="uid://brejidgy2nq2j" path="res://ui/Pausing.tscn" id="11_4d0og"]
 [ext_resource type="Shader" uid="uid://b1hg6btlggl78" path="res://TRASH/uhhhhh.gdshader" id="12_b458c"]
 [ext_resource type="PackedScene" uid="uid://7l5yih8w56c3" path="res://Player/Scenes/PlayerCamera.tscn" id="13_f6si6"]
 [ext_resource type="PackedScene" uid="uid://s7e7l3au1xci" path="res://Player/Ball/ball.tscn" id="14_3y846"]
 [ext_resource type="Script" uid="uid://dv1kbb33hpwq2" path="res://Scripts/BallInput.gd" id="15_bjmos"]
+[ext_resource type="AudioStream" uid="uid://bypuvpye7te6v" path="res://Sounds/Synth_se_stg_d_common_006_10coin_get_aif.wav" id="15_jbv4l"]
+[ext_resource type="Texture2D" uid="uid://c1usx2kspa0ts" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="16_buwrb"]
 [ext_resource type="Script" uid="uid://pfbt3jtg6fxf" path="res://Game/BankPlatformL.gd" id="17_jbv4l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51das"]
@@ -55,8 +56,8 @@ uv1_offset = Vector3(0, -0.84, 0)
 diffuse_mode = 3
 specular_mode = 1
 disable_ambient_light = true
-albedo_color = Color(0.39, 0.39, 0.39, 1)
-albedo_texture = ExtResource("10_ng0fc")
+albedo_color = Color(0.98, 0.98, 0.4606, 1)
+albedo_texture = ExtResource("9_jbv4l")
 uv1_scale = Vector3(-9.42, -9.42, -9.42)
 uv1_triplanar_sharpness = 0.233259
 texture_filter = 4
@@ -66,39 +67,39 @@ shader = ExtResource("12_b458c")
 shader_parameter/speedScale = 50.875
 shader_parameter/clipPosition = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjmos"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2omuf"]
 shading_mode = 0
 
-[sub_resource type="SphereMesh" id="SphereMesh_buwrb"]
+[sub_resource type="SphereMesh" id="SphereMesh_dskpo"]
 
-[sub_resource type="MultiMesh" id="MultiMesh_buwrb"]
+[sub_resource type="MultiMesh" id="MultiMesh_68c15"]
 transform_format = 1
 instance_count = 15
-mesh = SubResource("SphereMesh_buwrb")
-buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.3893e+34, 8.07148e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 0, 0, 0, 0, 9.18355e-41, 0, 0, -1.86784, 0, 0, 0, 0, 0, 0, 0, -6.0536e-09, -1.86728, 0, 0, 0, 0, 0, 0, 0, -2.12511e+38, 0, 0, 0, 0, 0, 0, 0, 52228.4, 7.20267e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9.2984e-40, 3.08286e-44, 1.53221e-30, 8.07148e-43, 1.26117e-44, 1.4013e-45, 0, 0, 1.12104e-44, 0, 0, 0, 0, 0, 0, 0, 0, 0, nan, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 1.53221e-30, 8.07148e-43, 2.69049e-43, 5.60519e-44, 4.62428e-44, 1.4013e-45, 2.8026e-45, 0, 5.60519e-44, 4.62428e-44, 1.4013e-45, 0, 2.8026e-45, 0, 1.4013e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.60519e-45, 0, 8.40779e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.96182e-44, 0, 0, 0, 0, 0)
+mesh = SubResource("SphereMesh_dskpo")
+buffer = PackedFloat32Array(-3.06121e-19, 8.39378e-43, 0, 0, 0, 0, -2.02911, 2.02496, -4.97936e+07, 4.59163e-41, -4.95838e+07, 4.59163e-41, -4.95865e+07, 4.59163e-41, -4.96103e+07, 4.59163e-41, -5.01714e+07, 4.59163e-41, -4.96134e+07, 4.59163e-41, -4.99217e+07, 4.59163e-41, -5.01272e+07, 4.59163e-41, -5.10302e+07, 4.59163e-41, -4.96124e+07, 4.59163e-41, -4.83292e+07, 4.59163e-41, -4.83613e+07, 4.59163e-41, -4.83584e+07, 4.59163e-41, 0, 0, 0, 0, 0, 0, -4.9803e+07, 4.59163e-41, -4.98033e+07, 4.59163e-41, -5.00045e+07, 4.59163e-41, -5.02148e+07, 4.59163e-41, -5.03649e+07, 4.59163e-41, 0, 0, 0, 0, -4.98351e+07, 4.59163e-41, -2.23693e-26, 8.39378e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-[sub_resource type="PrismMesh" id="PrismMesh_jbv4l"]
+[sub_resource type="PrismMesh" id="PrismMesh_ljenh"]
 
-[sub_resource type="MultiMesh" id="MultiMesh_jbv4l"]
+[sub_resource type="MultiMesh" id="MultiMesh_f6od5"]
 transform_format = 1
 instance_count = 15
-mesh = SubResource("PrismMesh_jbv4l")
+mesh = SubResource("PrismMesh_ljenh")
 buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.3893e+34, 8.07148e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 0, 0, 0, 0, 9.18355e-41, 0, 0, -1.86784, 0, 0, 0, 0, 0, 0, 0, -6.0536e-09, -1.86728, 0, 0, 0, 0, 0, 0, 0, -2.12511e+38, 0, 0, 0, 0, 0, 0, 0, 52228.4, 7.20267e-43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9.2984e-40, 3.08286e-44, 1.53221e-30, 8.07148e-43, 1.26117e-44, 1.4013e-45, 0, 0, 1.12104e-44, 0, 0, 0, 0, 0, 0, 0, 0, 0, nan, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.46862e-24, 0, 1.53221e-30, 8.07148e-43, 2.69049e-43, 5.60519e-44, 4.62428e-44, 1.4013e-45, 2.8026e-45, 0, 5.60519e-44, 4.62428e-44, 1.4013e-45, 0, 2.8026e-45, 0, 1.4013e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.60519e-45, 0, 8.40779e-45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.96182e-44, 0, 0, 0, 0, 0)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_buwrb"]
-size = Vector3(1, 0.0996704, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbv4l"]
+size = Vector3(1, 1, 0.210815)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbv4l"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ycfb"]
 diffuse_mode = 3
 specular_mode = 1
 disable_ambient_light = true
-albedo_color = Color(0.873298, 0.873298, 0.873298, 1)
-albedo_texture = ExtResource("9_buwrb")
-uv1_scale = Vector3(-2, -2, -2)
+albedo_color = Color(0.593627, 0.618446, 0, 1)
+albedo_texture = ExtResource("16_buwrb")
+uv1_scale = Vector3(-9.42, -9.42, -9.42)
 uv1_triplanar_sharpness = 0.233259
 texture_filter = 4
 
-[sub_resource type="BoxMesh" id="BoxMesh_8ycfb"]
+[sub_resource type="BoxMesh" id="BoxMesh_2omuf"]
 
 [node name="DEBUG" type="Node3D"]
 
@@ -115,18 +116,7 @@ volume_db = -17.433
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.50051, 0)
-light_energy = 1.329
-shadow_enabled = true
-shadow_normal_bias = 3.564
-directional_shadow_mode = 0
-directional_shadow_split_1 = 0.183
-directional_shadow_fade_start = 0.0
-directional_shadow_pancake_size = 0.0
-sky_mode = 1
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0505383, -0.992546, -0.110896, 0.909961, 3.97757e-08, -0.414693, 0.411602, -0.121869, 0.903179, 0, 9.50051, 0)
-light_energy = 1.329
+light_energy = 3.484
 shadow_enabled = true
 shadow_normal_bias = 3.564
 directional_shadow_mode = 0
@@ -137,13 +127,6 @@ sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_buwrb")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(-1, -7.6265e-14, 8.74228e-08, 6.22794e-08, 0.70178, 0.712394, -6.13516e-08, 0.712394, -0.70178, -0.0220762, 9.80274, 5.69506)
-light_energy = 16.0
-spot_range = 2.95623
-spot_attenuation = 10.0
-spot_angle = 24.1998
 
 [node name="CursorRoot" parent="." instance=ExtResource("4_jbv4l")]
 
@@ -206,6 +189,11 @@ collision_mask = 3
 transform = Transform3D(11.342, -6.82121e-13, 0, 1.77636e-15, 1.633, 0, 0, 0, 8.724, -28.904, -0.351222, -0.295048)
 material_override = SubResource("StandardMaterial3D_0chel")
 size = Vector3(5.00703, 0.737174, 0.132078)
+
+[node name="Floor2" type="CSGBox3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
+transform = Transform3D(8.112, 0, 0, 2.66454e-15, 1.168, 0, 0, 0, 6.24, 15.8471, -0.407264, -1.01559)
+material_override = SubResource("StandardMaterial3D_0chel")
+size = Vector3(0.194458, 0.737174, 0.132078)
 
 [node name="Hole" type="CSGCylinder3D" parent="Preview/SubViewportContainer/SubViewport/Floor"]
 transform = Transform3D(-4.87765e-08, 3.834, 0, -0.025, -7.48036e-06, 0, 0, 0, 0.02, -0.729891, -0.345004, -0.0837608)
@@ -303,12 +291,26 @@ mouse_force_pass_scroll_events = false
 color = Color(0, 0, 0, 1)
 
 [node name="CameraSet" parent="Preview/SubViewportContainer/SubViewport" instance=ExtResource("13_f6si6")]
-transform = Transform3D(0.00872656, 0.601792, -0.798605, 0, 0.798636, 0.601815, 0.999961, -0.00525178, 0.00696934, -21.281, 16.79, -1.17)
-target = NodePath("../Ball/CT1")
-speed = 5.0
+transform = Transform3D(0.00872655, 0.358354, -0.933545, 0, 0.933581, 0.358368, 0.999961, -0.00312732, 0.00814695, 0, 0, 0)
+target = NodePath("../Ball")
+speed = 7.0
+enabled = true
+y_offset = 4.14
+x_offset = -4.63
+z_offset = 0.01
 
 [node name="Respawn" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.41, 0, 0, 0, -1.79217e-08, -0.41, 0, 0.41, -1.79217e-08, 0, 1, -3)
+transform = Transform3D(0.41, 0, 0, 0, -1.79217e-08, -0.41, 0, 0.41, -1.79217e-08, -13, 1, 3)
+gizmo_extents = 4.42
+
+[node name="Ball" parent="Preview/SubViewportContainer/SubViewport" node_paths=PackedStringArray("parabola_mesh", "golf_line_mesh") instance=ExtResource("14_3y846")]
+transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -13, 1, 3)
+gravity_scale = 4.0
+parabola_mesh = NodePath("../Input/PongLine")
+golf_line_mesh = NodePath("../Input/GolfLine")
+
+[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport/Ball"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -43.9024, 21.9512, -2.43902)
 gizmo_extents = 4.42
 
 [node name="Input" type="Node" parent="Preview/SubViewportContainer/SubViewport" node_paths=PackedStringArray("respawnPoint", "pong", "golf_line")]
@@ -320,96 +322,105 @@ pong = NodePath("PongLine")
 golf_line = NodePath("GolfLine")
 
 [node name="PongLine" type="MultiMeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Input"]
-transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-09, 0, -3.72529e-09, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_bjmos")
-multimesh = SubResource("MultiMesh_buwrb")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_2omuf")
+multimesh = SubResource("MultiMesh_68c15")
 
 [node name="GolfLine" type="MultiMeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Input"]
-transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-09, 0, -3.72529e-09, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_bjmos")
-multimesh = SubResource("MultiMesh_jbv4l")
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 2.79397e-09, 0, -2.79397e-09, 0.75, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2omuf")
+multimesh = SubResource("MultiMesh_f6od5")
 
-[node name="Ball" parent="Preview/SubViewportContainer/SubViewport" node_paths=PackedStringArray("parabola_mesh", "golf_line_mesh") instance=ExtResource("14_3y846")]
-transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 1, -3)
-gravity_scale = 2.0
-parabola_mesh = NodePath("../Input/PongLine")
-golf_line_mesh = NodePath("../Input/GolfLine")
-
-[node name="CT1" type="Marker3D" parent="Preview/SubViewportContainer/SubViewport/Ball"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -43.9024, 21.9512, -2.43902)
-gizmo_extents = 4.42
-
-[node name="Bank1" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
-transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 3, -12)
-script = ExtResource("17_jbv4l")
-bank_power = 0.8
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank1" groups=["BankPlatform"]]
-transform = Transform3D(42, 0, 0, 0, 1.635, 0, 0, 0, 9.175, 0, 0.0903935, 4.76837e-07)
-shape = SubResource("BoxShape3D_buwrb")
-debug_color = Color(0, 0.595, 0.7, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank1"]
-transform = Transform3D(42, 0, 0, 0, 0.23, 0, 0, 0, 9.175, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_jbv4l")
-mesh = SubResource("BoxMesh_8ycfb")
-
-[node name="Bank4" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
-transform = Transform3D(-1, 6.18173e-08, 6.18173e-08, 0, 0.707107, -0.707107, -8.74228e-08, -0.707107, -0.707107, 0, 3, -6)
-script = ExtResource("17_jbv4l")
-bank_power = 0.8
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank4" groups=["BankPlatform"]]
-transform = Transform3D(51.66, 2.27153e-08, -9.68225e-07, -5.45161e-06, 0.423169, -8.86237, 7.17718e-07, 1.57929, 2.37466, -6.00001, -8.42838, -18.3411)
-shape = SubResource("BoxShape3D_buwrb")
-debug_color = Color(0, 0.595, 0.7, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank4"]
-transform = Transform3D(51.66, 3.19543e-09, -9.68225e-07, -5.45161e-06, 0.0595284, -8.86237, 7.17716e-07, 0.222163, 2.37466, -6.00001, -8.45178, -18.4284)
-material_override = SubResource("StandardMaterial3D_jbv4l")
-mesh = SubResource("BoxMesh_8ycfb")
-
-[node name="Bank5" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
-transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, -7.10543e-15, 0.707107, 0.707107, 13, 3, 6)
-script = ExtResource("17_jbv4l")
-bank_power = 0.8
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank5" groups=["BankPlatform"]]
-transform = Transform3D(51.66, 2.27153e-08, -9.68225e-07, -5.45161e-06, 0.423169, -8.86237, 7.17718e-07, 1.57929, 2.37466, -6.00001, -8.42838, -18.3411)
-shape = SubResource("BoxShape3D_buwrb")
-debug_color = Color(0, 0.595, 0.7, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank5"]
-transform = Transform3D(51.66, 3.19543e-09, -9.68225e-07, -5.45161e-06, 0.0595284, -8.86237, 7.17716e-07, 0.222163, 2.37466, -6.00001, -8.45178, -18.4284)
-material_override = SubResource("StandardMaterial3D_jbv4l")
-mesh = SubResource("BoxMesh_8ycfb")
+[node name="RespawnSound" type="AudioStreamPlayer" parent="Preview/SubViewportContainer/SubViewport/Input"]
+stream = ExtResource("15_jbv4l")
 
 [node name="Bank3" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
-transform = Transform3D(-6.55671e-08, -0.707107, -0.707107, 2.18557e-08, 0.707107, -0.707107, 1, -6.18172e-08, -3.09086e-08, 5, 3, -2)
+transform = Transform3D(13.366, 0, 0, 0, -10.1231, 0.737535, 0, -6.0826, -1.22746, -1.225, 4.77598, 12.133)
 script = ExtResource("17_jbv4l")
-bank_power = 0.8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank3" groups=["BankPlatform"]]
-transform = Transform3D(5.71, 0, 0, 0, 1.635, 0, 0, 0, 8.845, 0, 0.0903935, 4.76837e-07)
-shape = SubResource("BoxShape3D_buwrb")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank3"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
 debug_color = Color(0, 0.595, 0.7, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank3"]
-transform = Transform3D(5.71, 0, 0, 0, 0.23, 0, 0, 0, 8.845, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_jbv4l")
-mesh = SubResource("BoxMesh_8ycfb")
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")
 
-[node name="Bank2" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
-transform = Transform3D(-1, -1.0677e-07, -1.0677e-07, 0, 0.707107, -0.707107, 1.50996e-07, -0.707107, -0.707107, 0, 3, 11)
+[node name="Bank4" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(7.051, 0, 0, 0, 1.71722, 0.725753, 0, -5.98866, 0.208106, -1.225, 2.419, 1.133)
 script = ExtResource("17_jbv4l")
-bank_power = 0.8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank2" groups=["BankPlatform"]]
-transform = Transform3D(40, 0, 0, 0, 1.635, 0, 0, 0, 10.9, 0, 0.0903935, 4.76837e-07)
-shape = SubResource("BoxShape3D_buwrb")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank4"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
 debug_color = Color(0, 0.595, 0.7, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank2"]
-transform = Transform3D(40, 0, 0, 0, 0.23, 0, 0, 0, 10.9, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_jbv4l")
-mesh = SubResource("BoxMesh_8ycfb")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank4"]
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")
+
+[node name="Bank5" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(40.712, 0, 0, 0, 8.07603, 1.10745, 0, -9.1376, 0.978792, 1.775, 3.53064, -5.867)
+script = ExtResource("17_jbv4l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank5"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank5"]
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")
+
+[node name="Bank6" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(11.403, 0, 0, 0, -6.99868, 0.878314, 0, -7.24735, -0.848178, -1.225, 11.419, 24.133)
+script = ExtResource("17_jbv4l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank6"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank6"]
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")
+
+[node name="Bank7" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(11.391, 0, 0, 0, 5.18386, 1.04574, 0, -8.62739, 0.628346, -1.225, 11.419, -12.867)
+script = ExtResource("17_jbv4l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank7"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank7"]
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")
+
+[node name="Bank8" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(-2.17937e-07, 3.02036, -0.660338, -2.17937e-07, 5.44888, 0.366031, 7.051, 2.10596e-07, -3.07257e-08, 13.775, 5.419, 6.133)
+script = ExtResource("17_jbv4l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank8"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank8"]
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")
+
+[node name="Bank9" type="StaticBody3D" parent="Preview/SubViewportContainer/SubViewport" groups=["BankPlatform"]]
+transform = Transform3D(-3.08209e-07, -3.25517, -0.643743, 0, -5.31195, 0.394486, -7.051, 1.42288e-07, 2.81389e-08, 6.775, 1.419, 6.133)
+script = ExtResource("17_jbv4l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview/SubViewportContainer/SubViewport/Bank9"]
+transform = Transform3D(0.985, 0, 0, 0, 0.985, -1.1023e-07, 0, 1.1023e-07, 0.985, 0, 0, 0.394592)
+shape = SubResource("BoxShape3D_jbv4l")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Preview/SubViewportContainer/SubViewport/Bank9"]
+material_override = SubResource("StandardMaterial3D_8ycfb")
+mesh = SubResource("BoxMesh_2omuf")

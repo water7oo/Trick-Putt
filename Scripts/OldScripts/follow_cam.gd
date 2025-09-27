@@ -17,6 +17,10 @@ var cam_lerp_speed: float = .005
 
 var is_mouse_visible: bool = true
 
+var is_rotating_with_mmb: bool = false
+var last_mouse_pos: Vector2 = Vector2.ZERO
+
+
 @export var period: float = .04
 @export var magnitude: float = 0.08
 
@@ -24,16 +28,34 @@ var y_cam_rot_dist: float = 0
 var x_cam_rot_dist: float = 0
 
 var target_node: Node3D
+var rotating_camera: bool = false
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	target_node = get_node(target) as Node3D
 
+
+
 func _unhandled_input(event):
+	# Quit shortcut
 	if Input.is_action_just_pressed("quit_game"):
 		print("Quit Game")
 		get_tree().quit()
+
+	# Start/stop rotating camera
+	if event is InputEventMouseButton:
+		if event.pressed and Input.is_action_pressed("cam_move"):
+			rotating_camera = true
+		elif not event.pressed and not Input.is_action_pressed("cam_move"):
+			rotating_camera = false
+
+	# Rotate when moving mouse and cam_move is active
+	if event is InputEventMouseMotion and Input.is_action_pressed("cam_move"):
+		var delta = event.relative
+		spring_arm_pivot.rotate_y(-delta.x * mouse_sensitivity)
+
 
 func _physics_process(delta):
 	followTarget(delta)
@@ -48,21 +70,21 @@ func followTarget(delta):
 		return
 
 	# Get current and target positions
-	var current_pos = global_transform.origin
-	var target_pos = target_node.global_transform.origin
+	var current_pos = position
+	var target_pos = target_node.position
 
 	# Apply offsets
-	#target_pos.y += y_offset
-	#target_pos.x += x_offset
-	#target_pos.z += z_offset
+	target_pos.y += y_offset
+	target_pos.x += x_offset
+	target_pos.z += z_offset
 
 	# Smoothly interpolate position
 	var new_pos = current_pos.lerp(target_pos, speed * delta)
 
 	# Update ONLY the position, keep this node's own rotation stable
-	global_transform.origin = new_pos
+	transform.origin = new_pos
 	# Force rotation back to neutral (so no spinning with ball)
-	global_transform.basis = Basis.IDENTITY
+	#transform.basis = Basis.IDENTITY
 
 func applyShake(period, magnitude):
 	var initial_transform = self.transform

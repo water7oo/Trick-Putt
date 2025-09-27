@@ -6,7 +6,7 @@ extends Node
 @export var max_drag_length := 300.0
 @export var respawnPoint = Marker3D
 @export var golfShotPreviewLength := 20
-
+@onready var respawnSound: AudioStreamPlayer = $RespawnSound
 @export var pong: MultiMeshInstance3D
 @export var golf_line: MultiMeshInstance3D
 
@@ -134,7 +134,7 @@ func respawn_Player():
 
 	if Input.is_action_just_pressed("Respawn"):
 		var ball_node = get_node(ball)
-		print("Respawn")
+		respawnSound.play()
 		if ball_node and respawnPoint:
 			# Teleport the ball to the Marker3D position
 			ball_node.global_transform.origin = respawnPoint.global_transform.origin

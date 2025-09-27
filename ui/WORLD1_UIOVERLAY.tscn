@@ -1,9 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://dji1l5rpxpqhh"]
+[gd_scene load_steps=9 format=3 uid="uid://dji1l5rpxpqhh"]
 
-[ext_resource type="Texture2D" uid="uid://dptgkuoexmuw7" path="res://ui/tut_overlay_level.png" id="1_mgd3w"]
+[ext_resource type="Texture2D" uid="uid://b6n0tg8r8rewd" path="res://ui/W1_selector.png" id="2_6pg0x"]
+[ext_resource type="Texture2D" uid="uid://c0fv3avlid2a8" path="res://ui/worldHiragana1.png" id="3_0piqc"]
+[ext_resource type="Texture2D" uid="uid://dcti5t7532kht" path="res://ui/PreviousButton.png" id="4_p33o3"]
+[ext_resource type="Texture2D" uid="uid://ciqnygytab3vb" path="res://ui/rightSelect.png" id="5_28glj"]
+[ext_resource type="Texture2D" uid="uid://dwwbfh5b6cguh" path="res://ui/leftSelect.png" id="6_axwp6"]
+[ext_resource type="Texture2D" uid="uid://di51fnj86gq2k" path="res://ui/levels.png" id="9_tjjst"]
+[ext_resource type="Texture2D" uid="uid://cn2l0eivhoco8" path="res://ui/LevelStats.png" id="10_6wxb2"]
+[ext_resource type="Texture2D" uid="uid://1h2evtdhl88k" path="res://ui/W1Logo.png" id="11_nnhu0"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(512, 385)
+scale = Vector2(1.01, 1.01)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(514, 386)
-texture = ExtResource("1_mgd3w")
+[node name="LevelSelectorBack" type="Sprite2D" parent="."]
+texture = ExtResource("2_6pg0x")
+
+[node name="Hiragana" type="Sprite2D" parent="."]
+texture = ExtResource("3_0piqc")
+
+[node name="Previous" type="Sprite2D" parent="."]
+texture = ExtResource("4_p33o3")
+
+[node name="RSelect" type="Sprite2D" parent="."]
+texture = ExtResource("5_28glj")
+
+[node name="LSelect" type="Sprite2D" parent="."]
+texture = ExtResource("6_axwp6")
+
+[node name="Levels" type="Sprite2D" parent="."]
+texture = ExtResource("9_tjjst")
+
+[node name="Stats" type="Sprite2D" parent="."]
+texture = ExtResource("10_6wxb2")
+
+[node name="Sprite2D12" type="Sprite2D" parent="."]
+visible = false
+
+[node name="W1" type="Sprite2D" parent="."]
+texture = ExtResource("11_nnhu0")

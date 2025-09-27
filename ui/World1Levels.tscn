@@ -1,13 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://dh3mtpi2x4067"]
+[gd_scene load_steps=21 format=3 uid="uid://dh3mtpi2x4067"]
 
 [ext_resource type="Script" uid="uid://r0sg4cc2ec3t" path="res://ui/world_1_levels.gd" id="1_buwff"]
+[ext_resource type="PackedScene" uid="uid://q6e3dlla3a5k" path="res://Game/WORLDS/W1/L1/W1_001.tscn" id="2_4ej2r"]
 [ext_resource type="Shader" uid="uid://cj820imnefddq" path="res://Shaders/1Bit3D_Shader.gdshader" id="2_8u4il"]
 [ext_resource type="PackedScene" uid="uid://eueafrminvea" path="res://Player/CursorPlayer.tscn" id="2_buwff"]
 [ext_resource type="Texture2D" uid="uid://bfnab31ns8f7g" path="res://My Textures/tutorialLevel_TV.png" id="3_sehnj"]
 [ext_resource type="PackedScene" uid="uid://byiwrnoah113n" path="res://ui/GameStartANIM.tscn" id="4_61css"]
+[ext_resource type="AudioStream" uid="uid://b8flrn1d7qc84" path="res://Sounds/ambience.mp3" id="4_v132i"]
+[ext_resource type="AudioStream" uid="uid://bb3hc1lfdxqw4" path="res://Sounds/Synth_se_stg_d_common_005_coin_get2_aif.wav" id="5_f3vie"]
 [ext_resource type="PackedScene" uid="uid://uwgpswcjlqob" path="res://ui/WORLD1_EDITOR.tscn" id="5_lj5b6"]
 [ext_resource type="PackedScene" uid="uid://dji1l5rpxpqhh" path="res://ui/WORLD1_UIOVERLAY.tscn" id="5_rco16"]
+[ext_resource type="AudioStream" uid="uid://bypuvpye7te6v" path="res://Sounds/Synth_se_stg_d_common_006_10coin_get_aif.wav" id="5_v132i"]
+[ext_resource type="Texture2D" uid="uid://bofy2rgns5nl3" path="res://ui/level1Image.png" id="8_61css"]
 [ext_resource type="Shader" uid="uid://dg0o1j78d3etb" path="res://Shaders/TestingShaders3.gdshader" id="8_f3vie"]
+[ext_resource type="Texture2D" uid="uid://du5le5dlqhqm5" path="res://ui/level2_Image.png" id="9_lj5b6"]
 [ext_resource type="Texture2D" uid="uid://b371bs0t0y4nb" path="res://My Textures/bgWorlds.jpg" id="9_vgt1o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wlemm"]
@@ -41,12 +47,20 @@ script = ExtResource("1_buwff")
 fade_overlay = NodePath("SceneTransition/FadeTransition")
 levelSelector = NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/LevelSelect")
 level_markers = [NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv1"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv2"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv3"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv4"), NodePath("Preview/SubViewportContainer/LEVELSELECTOR1/lv5")]
+W1Level1 = ExtResource("2_4ej2r")
 
 [node name="CursorRoot" parent="." instance=ExtResource("2_buwff")]
 
-[node name="worldSelectScroll" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_v132i")
+volume_db = 6.012
 
-[node name="worldTransition" type="AudioStreamPlayer" parent="."]
+[node name="LevelSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_f3vie")
+
+[node name="LevelNav" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_v132i")
+volume_db = -3.006
 
 [node name="SceneTransition" type="CanvasLayer" parent="."]
 visible = false
@@ -87,23 +101,36 @@ visible = false
 position = Vector2(514, 417)
 texture = ExtResource("3_sehnj")
 
+[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("4_61css")]
+position = Vector2(0, -4.00001)
+
+[node name="OVERLAY" parent="Preview/SubViewportContainer" instance=ExtResource("5_rco16")]
+
+[node name="Level3" type="Sprite2D" parent="Preview/SubViewportContainer/OVERLAY"]
+visible = false
+texture = ExtResource("8_61css")
+
+[node name="Level4" type="Sprite2D" parent="Preview/SubViewportContainer/OVERLAY"]
+visible = false
+texture = ExtResource("9_lj5b6")
+
 [node name="LEVELSELECTOR1" parent="Preview/SubViewportContainer" instance=ExtResource("5_lj5b6")]
-position = Vector2(0, 32)
+position = Vector2(-23, 0)
 
 [node name="lv5" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
-position = Vector2(881.3, 483.3)
+position = Vector2(847.3, 483.3)
 gizmo_extents = 108.3
 
 [node name="lv4" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
-position = Vector2(683.3, 483.3)
+position = Vector2(672.3, 483.3)
 gizmo_extents = 108.3
 
 [node name="lv3" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
-position = Vector2(499.3, 483.3)
+position = Vector2(481.3, 483.3)
 gizmo_extents = 108.3
 
 [node name="lv2" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
-position = Vector2(317.3, 483.3)
+position = Vector2(309.3, 483.3)
 gizmo_extents = 108.3
 
 [node name="lv1" type="Marker2D" parent="Preview/SubViewportContainer/LEVELSELECTOR1"]
@@ -122,12 +149,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 81
 text = "▼"
-
-[node name="Opener" parent="Preview/SubViewportContainer" instance=ExtResource("4_61css")]
-position = Vector2(0, -4.00001)
-
-[node name="OVERLAY" parent="Preview/SubViewportContainer" instance=ExtResource("5_rco16")]
-position = Vector2(0, 32)
 
 [node name="SubViewport" type="SubViewport" parent="Preview/SubViewportContainer"]
 handle_input_locally = false
